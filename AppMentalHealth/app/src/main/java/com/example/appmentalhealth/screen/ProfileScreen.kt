@@ -1,15 +1,22 @@
 package com.example.appmentalhealth.screen
 
+import android.os.Build
+import android.service.autofill.UserData
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -22,11 +29,43 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
+data class UserData(
+    val fullname: String = "",
+    val email: String = "",
+    val nim: String = "",
+    val phoneNumber: String = ""
+)
+
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun ProfileScreen(
     navController: NavController
 ) {
+    var userData by remember { mutableStateOf(com.example.appmentalhealth.screen.UserData()) }
+    val auth = FirebaseAuth.getInstance()
+    val userId = auth.currentUser?.uid
+
+    LaunchedEffect(userId) {
+        userId?.let { uid ->
+            FirebaseFirestore.getInstance().collection("user").document(uid)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        userData = (document.toObject(com.example.appmentalhealth.screen.UserData::class.java) ?: com.example.appmentalhealth.screen.UserData())
+                        Log.d("ProfileScreen", "Data loaded: $userData")
+                    } else {
+                        Log.d("ProfileScreen", "No document found")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.d("ProfileScreen", "Error loading data", e)
+                }
+        } ?: Log.d("ProfileScreen", "User ID is null")
+    }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -49,16 +88,58 @@ fun ProfileScreen(
                 .fillMaxWidth()
                 .padding(20.dp)
         )
-        // Gambar
-        Image(
-            painter = painterResource(id = R.drawable.profile1),
-            contentDescription = null,
-            Modifier
-                .padding(10.dp)
+//        //detail profile
+        Card(
+            modifier = Modifier
+                .padding(16.dp)
                 .fillMaxWidth()
-                .fillMaxHeight(),
-            contentScale = ContentScale.Crop
-        )
+                .wrapContentHeight(),
+            shape = RoundedCornerShape(10.dp),
+            backgroundColor = Green4
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.profiletemp), // Ganti dengan resource gambar yang benar
+                    contentDescription = "Profile Picture",
+                    modifier = Modifier
+                        .size(120 .dp)
+                        .clip(CircleShape)
+                        .border(2.dp, Color.White, CircleShape)
+                )
+                Column(
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text =  userData.fullname,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
+                    )
+                    Text(
+                        text =  userData.email,
+                        color = Color.White.copy(alpha = 0.7f),
+                        fontSize = 14.sp
+                    )
+                    Text(
+                        text =  userData.nim,
+                        color = Color.White.copy(alpha = 0.7f),
+                        fontSize = 14.sp
+                    )
+                    Text(
+                        text =  userData.phoneNumber,
+                        color = Color.White.copy(alpha = 0.7f),
+                        fontSize = 14.sp
+                    )
+                }
+            }
+        }
 
         Text(
             text = "Account",
@@ -266,6 +347,7 @@ fun ProfileScreen(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Preview(showBackground = true)
 @Composable
 fun PreviewProfileScreen() {
