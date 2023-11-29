@@ -3,9 +3,12 @@ package com.example.appmentalhealth
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.appmentalhealth.data.UserViewModel
 import com.example.appmentalhealth.screen.*
 import com.example.appmentalhealth.data.UsersData
 
@@ -101,12 +104,20 @@ fun SetupNavGraph(
         composable(
             route = Screen.Profile.route
         ) {
-            ProfileScreen(UsersData(), navController)
+
+            ProfileScreen(
+                navController = rememberNavController(),
+                userData = UsersData()
+            )
         }
         composable(
             route = Screen.ProfileEdit.route
         ){
-            ProfileEdit(UsersData(), navController)
+            val viewModel = viewModel<UserViewModel>()
+            ProfileEdit(
+                navController = rememberNavController(),
+                viewModel = viewModel
+            )
         }
         composable(
             route = Screen.Profile2.route

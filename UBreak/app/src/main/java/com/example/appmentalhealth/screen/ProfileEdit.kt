@@ -20,25 +20,27 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
+import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
-import com.example.appmentalhealth.data.UsersData
+import com.example.appmentalhealth.data.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 @Composable
-fun ProfileEdit(
-    userData: UsersData,
-    navController: NavController
-) {
-    var name by remember { mutableStateOf(userData.fullname) }
-    var phone by remember { mutableStateOf(userData.phoneNumber) }
+fun ProfileEdit(navController: NavController, viewModel: UserViewModel) {
+    var name by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
 
-    val auth = FirebaseAuth.getInstance()
-    val userId = auth.currentUser?.uid
+    // Access user data from the ViewModel
+    val userName = viewModel.userName.value
+    val userEmail = viewModel.userEmail.value
+
+    // Variable to track if the profile update was successful
+    var showMessage by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -61,25 +63,29 @@ fun ProfileEdit(
             contentScale = ContentScale.Crop
         )
 
-        // User's Name (Updated with data from the database)
-        Text(
-            text = userData.fullname, // Use the name from the database
-            textAlign = TextAlign.Center,
-            fontFamily = alegreyaFamily,
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
-            modifier = Modifier.fillMaxWidth()
-        )
+        // User's Name (Updated with data from the ViewModel)
+        if (userName != null) {
+            Text(
+                text = userName, // Use the name from the ViewModel
+                textAlign = TextAlign.Center,
+                fontFamily = alegreyaFamily,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
 
-        // User's Email (Updated with data from the database)
-        Text(
-            text = userData.email, // Use the email from the database
-            textAlign = TextAlign.Center,
-            fontFamily = alegreyaFamily,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 16.sp,
-            modifier = Modifier.fillMaxWidth()
-        )
+        // User's Email (Updated with data from the ViewModel)
+        if (userEmail != null) {
+            Text(
+                text = userEmail, // Use the email from the ViewModel
+                textAlign = TextAlign.Center,
+                fontFamily = alegreyaFamily,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 16.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
 
         Spacer(modifier = Modifier.padding(10.dp))
 
@@ -109,6 +115,7 @@ fun ProfileEdit(
         Button(
             onClick = {
                 // Update only name and phone number in the database
+                val userId = FirebaseAuth.getInstance().currentUser?.uid
                 userId?.let { uid ->
                     val db = FirebaseFirestore.getInstance()
                     val userRef = db.collection("user").document(uid)
@@ -121,7 +128,9 @@ fun ProfileEdit(
                     userRef.update(updates)
                         .addOnSuccessListener {
                             // Data updated successfully
-                            navController.navigateUp()
+                            showMessage = true
+                            // Navigate to the profile page
+                            navController.navigate("profile")
                         }
                         .addOnFailureListener { e ->
                             // Handle error
@@ -142,16 +151,30 @@ fun ProfileEdit(
                 color = White
             )
         }
+
+        // Show a message if the profile update was successful
+        if (showMessage) {
+            Text(
+                text = "Profile updated successfully!",
+                textAlign = TextAlign.Center,
+                fontFamily = alegreyaFamily,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = Green4,
+                modifier = Modifier.fillMaxWidth().padding(top = 10.dp)
+            )
+        }
+
         Spacer(modifier = Modifier.padding(20.dp))
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewProfileEdit() {
+    val viewModel = viewModel<UserViewModel>()
     ProfileEdit(
-        userData = UsersData(),
-        navController = rememberNavController()
+        navController = rememberNavController(),
+        viewModel = viewModel
     )
 }

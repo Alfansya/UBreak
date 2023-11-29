@@ -34,15 +34,15 @@ import com.google.firebase.auth.FirebaseAuth
 fun WelcomeScreen(
     navController: NavController
 ) {
-//    // Check if the user is already logged in using Firebase Authentication
-//    val auth = FirebaseAuth.getInstance()
-//    val currentUser = auth.currentUser
-//
-//    // If the user is already logged in, navigate to the main screen
-//    if (currentUser != null) {
-//        navController.navigate(Screen.Main.route)
-//        return
-//    }
+    // Check if the user is already logged in using Firebase Authentication
+    val auth = FirebaseAuth.getInstance()
+    val currentUser = auth.currentUser
+
+    // If the user is already logged in, navigate to the main screen
+    if (currentUser != null) {
+        navController.navigate(Screen.Main.route)
+        return
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
