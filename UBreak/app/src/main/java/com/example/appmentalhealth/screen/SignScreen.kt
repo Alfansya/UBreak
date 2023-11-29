@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -162,54 +163,54 @@ fun SignScreen(
             Spacer(
                 modifier = Modifier.padding(50.dp)
             )
-        }
+            0      }
 
 
-        // Button Register
-        Box(
-            modifier = Modifier
-                .width(320.dp)
-                .padding(16.dp)
-                .padding(bottom = 50.dp)
-                .align(Alignment.BottomCenter)
-                .clip(RoundedCornerShape(50.dp))
-                .background(Color.White),
-        ) {
-            Button(
-                onClick = {
-                    registerWithEmailAndPassword(email, password, fullname, nim, phoneNumber, auth, context)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp)
-                    .background(Color.White),
-                colors = ButtonDefaults.buttonColors(Green4)
-            ) {
-                Text(
-                    text = "Register",
-                    fontFamily = alegreyaFamily,
-                    fontWeight = FontWeight.Thin,
-                    fontSize = 16.sp,
-                    color = White,
-                )
-            }
-        }
-
-        // Additional text and Sign In clickable
+        // Grouped elements in a Column with white background
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
-                .align(Alignment.BottomCenter)
-                .clip(RoundedCornerShape(50.dp)),
+                .height(150.dp)  // Take the full height of the screen
+                .background(Color.White)
+                .align(Alignment.BottomCenter),  // Align to the bottom center
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom
         ) {
+            // Button Register
+            Box(
+                modifier = Modifier
+                    .width(320.dp)
+                    .height(60.dp)
+            ) {
+                Button(
+                    onClick = {
+                        registerWithEmailAndPassword(email, password, fullname, nim, phoneNumber, auth, context)
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .clip(RoundedCornerShape(10.dp)),
+                    colors = ButtonDefaults.buttonColors(Green4)
+
+                ) {
+                    Text(
+                        text = "Register",
+                        fontFamily = alegreyaFamily,
+                        fontWeight = FontWeight.Thin,
+                        fontSize = 16.sp,
+                        color = Color.White,
+                    )
+                }
+            }
+
+            // Text "Do You Already Have An Account?" and "Sign In" in the same row
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
-                    .padding(top = 10.dp, bottom = 10.dp)
                     .background(Color.White),
-                horizontalArrangement = Arrangement.Start,
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = "Do You Already Have An Account?",
@@ -217,26 +218,7 @@ fun SignScreen(
                     modifier = Modifier
                         .padding(start = 20.dp)
                 )
-                Spacer(
-                    modifier = Modifier.padding(8.dp)
-                )
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(32.dp)
-                .align(Alignment.BottomCenter)
-                .clip(RoundedCornerShape(50.dp)),
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(1.dp)
-                    .padding(top = 10.dp, bottom = 10.dp),
-                horizontalArrangement = Arrangement.End,
-            ) {
+                Spacer(modifier = Modifier.padding(8.dp))
                 Text(
                     style = TextStyle(color = Green4),
                     text = "Sign In",
@@ -247,6 +229,9 @@ fun SignScreen(
                 )
             }
         }
+
+
+
     }
 }
 
