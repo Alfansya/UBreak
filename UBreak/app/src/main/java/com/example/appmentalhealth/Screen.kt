@@ -18,7 +18,7 @@ sealed class Screen(val route: String){
     object Conseling4: Screen(route = "conseling4_screen")
     object Conseling5: Screen(route = "conseling5_screen")
     object Profile: Screen(route = "profile_screen")
-    object Profile1: Screen(route = "profile1_screen")
+    object ProfileEdit: Screen(route = "profileedit_screen")
     object Profile2: Screen(route = "profile2_screen")
     object Profile3: Screen(route = "profile3_screen")
     object Sign: Screen(route = "sign_screen")
