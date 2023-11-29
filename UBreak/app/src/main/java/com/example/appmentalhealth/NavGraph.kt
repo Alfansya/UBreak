@@ -104,9 +104,9 @@ fun SetupNavGraph(
             ProfileScreen(UsersData(), navController)
         }
         composable(
-            route = Screen.Profile1.route
+            route = Screen.ProfileEdit.route
         ){
-            Profile1Screen(navController)
+            ProfileEdit(UsersData(), navController)
         }
         composable(
             route = Screen.Profile2.route

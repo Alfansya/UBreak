@@ -1,7 +1,6 @@
 package com.example.appmentalhealth.screen
 
 import android.os.Build
-import android.service.autofill.UserData
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.*
@@ -156,7 +155,7 @@ fun ProfileScreen(
                 Modifier
                     .padding(20.dp)
                     .width(200.dp)
-                    .clickable { navController.navigate(route = Screen.Profile1.route) }
+                    .clickable { navController.navigate(route = Screen.ProfileEdit.route) }
             )
             {
                 Image(
