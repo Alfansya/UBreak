@@ -1,11 +1,15 @@
 package com.example.appmentalhealth
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.appmentalhealth.screen.*
+import com.example.appmentalhealth.data.UsersData
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun SetupNavGraph(
     navController : NavHostController
@@ -96,8 +100,8 @@ fun SetupNavGraph(
         }
         composable(
             route = Screen.Profile.route
-        ){
-            ProfileScreen(navController)
+        ) {
+            ProfileScreen(UsersData(), navController)
         }
         composable(
             route = Screen.Profile1.route

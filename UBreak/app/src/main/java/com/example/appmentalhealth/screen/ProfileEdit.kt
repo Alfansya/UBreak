@@ -1,6 +1,5 @@
 package com.example.appmentalhealth.screen
 
-import android.graphics.Color
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
@@ -31,6 +30,14 @@ import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
 
+
+//data class UserData(
+//    val name: String = "",
+//    val email: String = "",
+//    val nim: String = "",
+//    val phoneNumber: String = "",
+//    val profileImageUrl: String = "" // Added profile image URL field
+//)
 @Composable
 fun Profile1Screen(
     navController: NavController
