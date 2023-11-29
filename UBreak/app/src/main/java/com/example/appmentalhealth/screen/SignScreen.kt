@@ -170,7 +170,7 @@ fun SignScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(150.dp)  // Take the full height of the screen
+                .height(100.dp)  // Take the full height of the screen
                 .background(Color.White)
                 .align(Alignment.BottomCenter),  // Align to the bottom center
             horizontalAlignment = Alignment.CenterHorizontally,
