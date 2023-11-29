@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "751897897274",
+    "project_id": "ubreak-cfd33",
+    "storage_bucket": "ubreak-cfd33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751897897274:android:4e4ef74e84e3f249044803",
+        "android_client_info": {
+          "package_name": "com.example.appmentalhealth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtvlYarHU7dA8uQexMtaLRmsSn6lTNKWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

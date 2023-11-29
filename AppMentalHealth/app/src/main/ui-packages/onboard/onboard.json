@@ -1,0 +1,510 @@
+{
+  "name": "onboard",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "qxW4RnVNss7roUEhU4LIz0",
+    "node": "2:2187",
+    "version": "4654065721",
+    "component-id": "3a5ca0af9bb45ae45f19ef3e85ac6555c30362e4"
+  },
+  "default": "Onboard",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Picture"
+      },
+      {
+        "type": "group",
+        "id": "Tagline"
+      },
+      {
+        "type": "group",
+        "id": "Button"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 1721"
+      },
+      {
+        "type": "group",
+        "id": "Harmonize Your Thoughts, Eleveate Your Grades"
+      },
+      {
+        "type": "group",
+        "id": "The best self-love, the finest peace, the powerful equilibrium."
+      },
+      {
+        "type": "text",
+        "id": "Harmonize Your Thoughts, Elevate Your Grades"
+      },
+      {
+        "type": "text",
+        "id": "The best self-love, the finest peace, the powerfull equilibrium."
+      },
+      {
+        "type": "text",
+        "id": "Get Started"
+      }
+    ],
+    "modes": {
+      "Onboard": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "Picture",
+              "Tagline",
+              "Button"
+            ],
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            }
+          },
+          {
+            "id": "Picture",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "-47.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "44.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "433.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "458.0"
+              }
+            },
+            "is-structured": "false",
+            "children": "$Picture",
+            "clip-content": "false"
+          },
+          {
+            "id": "Tagline",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "-2.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "394.00006103515625"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "362.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "414.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Rectangle 1721",
+              "Harmonize Your Thoughts, Eleveate Your Grades",
+              "The best self-love, the finest peace, the powerful equilibrium."
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Button",
+            "padding": {
+              "left": "109.0",
+              "top": "21.0",
+              "right": "109.0",
+              "bottom": "21.0"
+            },
+            "border-radius": "16.0",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "29.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "700.0"
+              }
+            },
+            "tap-handler": "$getstarted",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "300.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "62.0"
+              }
+            },
+            "arrangement": "row",
+            "children": [
+              "Get Started"
+            ],
+            "item-spacing": "10.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "152.59259259259258",
+              "saturation": "0.5586206896551724",
+              "value": "0.5686274509803921"
+            },
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 1721",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "2.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "9.5367431640625e-7"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "362.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "414.0"
+              }
+            },
+            "vector-content": "rectangle_1721.svg"
+          },
+          {
+            "id": "Harmonize Your Thoughts, Eleveate Your Grades",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "48.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "102.99993896484375"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "277.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "122.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Harmonize Your Thoughts, Elevate Your Grades"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "The best self-love, the finest peace, the powerful equilibrium.",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "13.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "240.00001525878906"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "340.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "30.999984741210938"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "The best self-love, the finest peace, the powerfull equilibrium."
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Harmonize Your Thoughts, Elevate Your Grades",
+            "alignment": {
+              "horizontal": {
+                "attachment": "center",
+                "offset": "0.0"
+              },
+              "vertical": {
+                "attachment": "center",
+                "offset": "0.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$title",
+            "overflow": "visible",
+            "text-size": "24.487728118896484",
+            "letter-spacing": "-0.4897545623779297",
+            "line-height": "1.2894999694824218",
+            "typeface": "Inknut Antiqua"
+          },
+          {
+            "id": "The best self-love, the finest peace, the powerfull equilibrium.",
+            "alignment": {
+              "horizontal": {
+                "attachment": "center",
+                "offset": "0.0"
+              },
+              "vertical": {
+                "attachment": "center",
+                "offset": "0.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "340.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "30.999984741210938"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.007905138339921031",
+              "value": "0.9921568627450981"
+            },
+            "text-content": "$description",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "20.0",
+            "letter-spacing": "-0.23999999463558197",
+            "line-height": "1.2102272033691406",
+            "typeface": "Inter"
+          },
+          {
+            "id": "Get Started",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "104.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "20.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$Get Started",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "letter-spacing": "-0.23999999463558197",
+            "line-height": "1.2102272851126534",
+            "typeface": "Inter"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Picture": {
+      "data-type": "list-item",
+      "required": false,
+      "description": ""
+    },
+    "getstarted": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "title": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "description": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "Get Started": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Onboard",
+      "size": {
+        "width": 360.0,
+        "height": 800.0
+      },
+      "parameters": {
+        "Picture": [
+          {
+            "type": "vector",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 358.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 125.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 60.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 60.0
+              }
+            },
+            "vector-content": "5.svg"
+          },
+          {
+            "type": "vector",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 47.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 60.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 60.0
+              }
+            },
+            "vector-content": "4.svg"
+          },
+          {
+            "type": "vector",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 196.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 163.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 237.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 295.0
+              }
+            },
+            "vector-content": "3.svg"
+          },
+          {
+            "type": "vector",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 47.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 147.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 274.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 311.0
+              }
+            },
+            "vector-content": "2.svg"
+          },
+          {
+            "type": "vector",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 47.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 4.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 357.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 434.0
+              }
+            },
+            "vector-content": "1.svg"
+          }
+        ],
+        "title": "Harmonize Your \nThoughts, \nElevate Your Grades",
+        "description": "The best self-love, the finest peace, the powerfull equilibrium.",
+        "Get Started": "Get Started"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
