@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,7 +26,6 @@ import com.example.appmentalhealth.ui.theme.alegreyaFamily
 @Composable
 fun MainScreen( navController: NavController
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -173,13 +173,17 @@ fun MainScreen( navController: NavController
                 )
             }
         }
+        Spacer(
+            modifier = Modifier.padding(28.dp)
+        )
         Row(
             modifier = Modifier
-                .padding(0.dp)
+                .background(color = Color.White)
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .background(color = White),
+                .padding(16.dp),
             horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.Bottom
         ) {
             Box(
                 modifier = Modifier
