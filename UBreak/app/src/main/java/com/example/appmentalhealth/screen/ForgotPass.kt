@@ -42,14 +42,14 @@ import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen(
+fun ForgotPass(
     navController: NavController
 ) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     // Firebase Auth
-    val auth = FirebaseAuth.getInstance()
+    //val auth = FirebaseAuth.getInstance()
 
     // Context
     val context = LocalContext.current
@@ -77,7 +77,7 @@ fun LoginScreen(
 
         // Title
         Text(
-            text = "Sign In",
+            text = "Forgot Password",
             fontFamily = alegreyaFamily,
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp,
@@ -91,7 +91,7 @@ fun LoginScreen(
             onValueChange = { email = it },
             label = { Text("Email") },
             modifier = Modifier
-                .width(350.dp)
+                .width(320.dp)
                 .padding(8.dp),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Next
@@ -103,109 +103,62 @@ fun LoginScreen(
             )
         )
 
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            modifier = Modifier
-                .width(350.dp)
-                .padding(8.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    performLogin(auth, context, email, password)
-                }
-            ),
-            visualTransformation = PasswordVisualTransformation()
-        )
-        // Text for "Forgot Password"
-        ClickableText(
-            text = AnnotatedString("Forgot Password ?"),
-            style = TextStyle(
-                fontFamily = alegreyaFamily,
-                fontSize = 16.sp,
-                color = Color.Gray
-            ),
-            modifier = Modifier
-                .padding(start = 15.dp, top = 15.dp, end = 30.dp, bottom = 15.dp)
-                .align(Alignment.End)
-        ) {
-            // Add logic for handling "Forgot Password" click
-        }
 
         Spacer(
-            modifier = Modifier.padding(50.dp)
+            modifier = Modifier.padding(15.dp)
         )
         // Button Sign In
         Column(modifier = Modifier
-            .width(320.dp)
-            .height(40.dp)
-            .clip(RoundedCornerShape(50.dp)),
-            )
+            .width(300.dp)
+            .height(60.dp)
+            .clip(RoundedCornerShape(15.dp)),
+        )
         {
             Button(
                 onClick = {
-                    performLogin(auth, context, email, password)
+                    navController.navigate(route = Screen.Login.route)
+                    // Add your sign-in logic here
+                    // Example: Check email and password, navigate to the home screen
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(),
                 colors = ButtonDefaults.buttonColors(Green4)
             ) {
-                Text(text = "Sign In",
+                Text(text = "Send",
                     fontFamily = alegreyaFamily,
                     fontWeight = FontWeight.Thin,
                     fontSize = 16.sp,
                     color = White,)
             }
         }
-        Row(Modifier
-            .padding(top=5.dp)
-        )
-        {
-            Text(
-                text = "Don't have an account yet?",
-                fontFamily = alegreyaFamily,
-            )
-            Spacer(
-                modifier = Modifier.padding(3.dp)
-            )
-            Text(
-                style = TextStyle(color = Color(0xFF43AE48)),
-                text = "Register",
-                fontFamily = alegreyaFamily,
-                modifier = Modifier.padding(3.dp)
-                    .clickable { navController.navigate(route = Screen.Sign.route) }
-            )
-        }
+
     }
 }
 
-private fun performLogin(
-    auth: FirebaseAuth,
-    context: android.content.Context,
-    email: String,
-    password: String
-) {
-    auth.signInWithEmailAndPassword(email, password)
-        .addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                // Login berhasil
-                Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show()
-                navController.navigate(route = Screen.Main.route)
-            } else {
-                // Login gagal
-                Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()
-            }
-        }
-}
+//private fun performLogin(
+//    auth: FirebaseAuth,
+//    context: android.content.Context,
+//    email: String,
+//    password: String
+//) {
+//    auth.signInWithEmailAndPassword(email, password)
+//        .addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                // Login berhasil
+//                Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show()
+//                navController.navigate(route = Screen.Main.route)
+//            } else {
+//                // Login gagal
+//                Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//}
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewLoginScreen() {
+fun PreviewForgotPass() {
     AppMentalHealthTheme() {
-        LoginScreen(rememberNavController())
+        ForgotPass(rememberNavController())
     }
 }
