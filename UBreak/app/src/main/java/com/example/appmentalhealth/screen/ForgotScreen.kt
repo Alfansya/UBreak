@@ -42,12 +42,11 @@ import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun ForgotPass(
+fun ForgotScreen(
     navController: NavController
 ) {
 
     var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
     // Firebase Auth
     //val auth = FirebaseAuth.getInstance()
 
@@ -91,7 +90,7 @@ fun ForgotPass(
             onValueChange = { email = it },
             label = { Text("Email") },
             modifier = Modifier
-                .width(320.dp)
+                .width(350.dp)
                 .padding(8.dp),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Next
@@ -103,22 +102,19 @@ fun ForgotPass(
             )
         )
 
-
         Spacer(
-            modifier = Modifier.padding(15.dp)
+            modifier = Modifier.padding(10.dp)
         )
         // Button Sign In
         Column(modifier = Modifier
-            .width(300.dp)
-            .height(60.dp)
+            .width(320.dp)
+            .height(40.dp)
             .clip(RoundedCornerShape(15.dp)),
         )
         {
             Button(
                 onClick = {
-                    navController.navigate(route = Screen.Login.route)
-                    // Add your sign-in logic here
-                    // Example: Check email and password, navigate to the home screen
+
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -132,33 +128,13 @@ fun ForgotPass(
                     color = White,)
             }
         }
-
     }
 }
 
-//private fun performLogin(
-//    auth: FirebaseAuth,
-//    context: android.content.Context,
-//    email: String,
-//    password: String
-//) {
-//    auth.signInWithEmailAndPassword(email, password)
-//        .addOnCompleteListener { task ->
-//            if (task.isSuccessful) {
-//                // Login berhasil
-//                Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show()
-//                navController.navigate(route = Screen.Main.route)
-//            } else {
-//                // Login gagal
-//                Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//}
-
 @Preview(showBackground = true)
 @Composable
-fun PreviewForgotPass() {
+fun PreviewForgotScreen() {
     AppMentalHealthTheme() {
-        ForgotPass(rememberNavController())
+        ForgotScreen(rememberNavController())
     }
 }

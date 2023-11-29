@@ -121,18 +121,17 @@ fun LoginScreen(
             visualTransformation = PasswordVisualTransformation()
         )
         // Text for "Forgot Password"
-        ClickableText(
-            text = AnnotatedString("Forgot Password ?"),
-            style = TextStyle(
+        Row(Modifier
+            .padding(top=5.dp)
+        )
+        {
+            Text(
+                style = TextStyle(color = Color(0xFF43AE48)),
+                text = "Forgot Password?",
                 fontFamily = alegreyaFamily,
-                fontSize = 16.sp,
-                color = Color.Gray
-            ),
-            modifier = Modifier
-                .padding(start = 15.dp, top = 15.dp, end = 30.dp, bottom = 15.dp)
-                .align(Alignment.End)
-        ) {
-            // Add logic for handling "Forgot Password" click
+                modifier = Modifier.padding(start = 40.dp, top = 15.dp, end = 30.dp, bottom = 15.dp)
+                    .clickable { navController.navigate(route = Screen.Forgot.route) }
+            )
         }
 
         Spacer(

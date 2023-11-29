@@ -123,6 +123,11 @@ fun SetupNavGraph(
         ){
             SignScreen(navController)
         }
+        composable(
+            route = Screen.Forgot.route
+        ){
+            ForgotScreen(navController)
+        }
 
 
     }
