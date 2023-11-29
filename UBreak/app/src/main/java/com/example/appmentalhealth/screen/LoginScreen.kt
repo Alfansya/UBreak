@@ -84,12 +84,12 @@ fun LoginScreen(
         )
 
         // Label Email
-        TextField(
+        OutlinedTextField(
             value = email,
             onValueChange = { email = it },
             label = { Text("Email") },
             modifier = Modifier
-                .fillMaxWidth()
+                .width(350.dp)
                 .padding(8.dp),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Next
@@ -101,12 +101,12 @@ fun LoginScreen(
             )
         )
 
-        TextField(
+        OutlinedTextField(
             value = password,
             onValueChange = { password = it },
             label = { Text("Password") },
             modifier = Modifier
-                .fillMaxWidth()
+                .width(350.dp)
                 .padding(8.dp),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
@@ -123,7 +123,7 @@ fun LoginScreen(
         )
         // Button Sign In
         Column(modifier = Modifier
-            .width(200.dp)
+            .width(320.dp)
             .height(40.dp)
             .clip(RoundedCornerShape(50.dp)),
             )
@@ -153,13 +153,13 @@ fun LoginScreen(
                 fontFamily = alegreyaFamily,
             )
             Spacer(
-                modifier = Modifier.padding(5.dp)
+                modifier = Modifier.padding(3.dp)
             )
             Text(
                 style = TextStyle(color = Color(0xFF43AE48)),
                 text = "Register",
                 fontFamily = alegreyaFamily,
-                modifier = Modifier
+                modifier = Modifier.padding(3.dp)
                     .clickable { navController.navigate(route = Screen.Sign.route) }
             )
         }
