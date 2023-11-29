@@ -139,8 +139,14 @@ fun SetupNavGraph(
         ){
             ForgotScreen(navController)
         }
-
-
-    }
-}
+        composable(
+            route = Screen.Logout.route
+        ){
+            LogoutScreen(navController, onDismiss = { /*TODO*/ }) {
+                
+            }
+        }
+                
+            } 
+        }
 

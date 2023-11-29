@@ -23,6 +23,6 @@ sealed class Screen(val route: String){
     object Profile3: Screen(route = "profile3_screen")
     object Sign: Screen(route = "sign_screen")
     object Forgot: Screen(route="forgot_screen")
-
+    object Logout: Screen(route = "logout_screen")
 
 }

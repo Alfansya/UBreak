@@ -191,7 +191,7 @@ fun ProfileScreen(
                     .padding(20.dp)
                     .padding(top = 150.dp)
                     .width(200.dp)
-                    .clickable { navController.navigate(route = Screen.Profile.route) }
+                    .clickable { navController.navigate(route = Screen.Logout.route) }
             )
             {
                 Image(

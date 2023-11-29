@@ -10,7 +10,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -19,6 +21,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.AppMentalHealthTheme
+import com.example.appmentalhealth.ui.theme.Green1
+import com.example.appmentalhealth.ui.theme.Green2
 import com.example.appmentalhealth.ui.theme.Green7
 import com.example.appmentalhealth.ui.theme.White
 import com.example.appmentalhealth.ui.theme.alegreyaFamily
@@ -26,11 +30,13 @@ import com.example.appmentalhealth.ui.theme.alegreyaFamily
 @Composable
 fun MainScreen( navController: NavController
 ) {
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .verticalScroll(rememberScrollState())
+            .padding(bottom = 20.dp)
             .background(color = Green7),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -53,14 +59,31 @@ fun MainScreen( navController: NavController
             fontFamily = alegreyaFamily,
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp,
-            color = White,
-            modifier = Modifier.padding(vertical = 8.dp)
+            color = Green1,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 30.dp, top = 10.dp)
+                .padding(vertical = 8.dp),
+            style = TextStyle(textAlign = TextAlign.Start)
         )
         Text(
-            text = "How are you felling today!" ,
+            text = "How are you feeling today!" ,
             fontFamily = alegreyaFamily,
             fontWeight = FontWeight.Thin,
             fontSize = 20.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 30.dp),
+            style = TextStyle(textAlign = TextAlign.Start)
+        )
+
+        Divider(
+            color = Green2,
+            thickness = 2.dp,
+            modifier = Modifier
+                .padding(top = 10.dp, bottom = 5.dp)
+                .width(350.dp)
+                .background(Color.Black, shape = RoundedCornerShape(0.dp, 0.dp, 100.dp, 100.dp))
         )
 
         Box(
@@ -73,7 +96,7 @@ fun MainScreen( navController: NavController
                 modifier = Modifier
                     .width(57.dp)
                     .height(80.dp),
-                painter = painterResource(id = R.drawable.happy),
+                painter = painterResource(id = R.drawable.happy_new),
                 contentDescription = "image description",
                 contentScale = ContentScale.None
             )
@@ -82,7 +105,7 @@ fun MainScreen( navController: NavController
                     .padding(start = 80.dp)
                     .width(57.dp)
                     .height(80.dp),
-                painter = painterResource(id = R.drawable.relax),
+                painter = painterResource(id = R.drawable.relax_new),
                 contentDescription = "image description",
                 contentScale = ContentScale.None
             )
@@ -91,7 +114,7 @@ fun MainScreen( navController: NavController
                     .padding(start = 160.dp)
                     .width(57.dp)
                     .height(80.dp),
-                painter = painterResource(id = R.drawable.sad),
+                painter = painterResource(id = R.drawable.sad_new),
                 contentDescription = "image description",
                 contentScale = ContentScale.None
             )
@@ -100,7 +123,7 @@ fun MainScreen( navController: NavController
                     .padding(start = 240.dp)
                     .width(57.dp)
                     .height(80.dp),
-                painter = painterResource(id = R.drawable.stress),
+                painter = painterResource(id = R.drawable.stress_new),
                 contentDescription = "image description",
                 contentScale = ContentScale.None
             )
@@ -110,7 +133,7 @@ fun MainScreen( navController: NavController
             modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
-                .padding(20.dp)
+                .padding(top = 20.dp, bottom = 40.dp)
                 .clip(RoundedCornerShape(25.dp))
                 .background(color = White),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -119,11 +142,15 @@ fun MainScreen( navController: NavController
         ) {
             Text(
                 modifier = Modifier
-                    .padding(start = 10.dp, bottom = 20.dp),
+                    .fillMaxWidth()
+                    .padding(start = 30.dp, top = 20.dp),
                 fontFamily = alegreyaFamily,
-                fontWeight = FontWeight.Black,
-                fontSize = 30.sp,
-                text = "Lets take a break.")
+                fontWeight = FontWeight.Thin,
+                fontSize = 24.sp,
+                text = "Let's take a break.",
+                color = Green1,
+                style = TextStyle(textAlign = TextAlign.Start)
+            )
 
             Box(modifier = Modifier
             .clickable {
@@ -135,7 +162,7 @@ fun MainScreen( navController: NavController
                     .fillMaxWidth()
                     .fillMaxHeight()
                     .padding(20.dp),
-                painter = painterResource(id = R.drawable.self),
+                painter = painterResource(id = R.drawable.self_new),
                 contentDescription = "image description",
                 contentScale = ContentScale.None
             )
@@ -151,7 +178,7 @@ fun MainScreen( navController: NavController
                         .fillMaxWidth()
                         .fillMaxHeight()
                         .padding(20.dp),
-                    painter = painterResource(id = R.drawable.daily),
+                    painter = painterResource(id = R.drawable.daily_new),
                     contentDescription = "image description",
                     contentScale = ContentScale.None
                 )
@@ -166,23 +193,20 @@ fun MainScreen( navController: NavController
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
-                        .padding(20.dp),
-                    painter = painterResource(id = R.drawable.konseling),
+                        .padding(top = 20.dp, bottom = 40.dp),
                     contentDescription = "image description",
+                    painter = painterResource(id = R.drawable.counseling_new),
                     contentScale = ContentScale.None
                 )
             }
         }
-        Spacer(
-            modifier = Modifier.padding(28.dp)
-        )
+
         Row(
             modifier = Modifier
                 .background(color = Color.White)
                 .fillMaxWidth()
-                .fillMaxHeight()
+                .wrapContentHeight()
                 .padding(16.dp),
-            horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.Bottom
         ) {
             Box(
@@ -190,13 +214,13 @@ fun MainScreen( navController: NavController
                     .clickable {
                         navController.navigate(route = Screen.Main.route)
                     }
+
             ){
                 Image(
                     modifier = Modifier
-                        .padding(start = 20.dp)
-                        .width(57.dp)
+                        .width(64.dp)
                         .height(80.dp),
-                    painter = painterResource(id = R.drawable.home),
+                    painter = painterResource(id = R.drawable.home_new),
                     contentDescription = "image description",
                     contentScale = ContentScale.None
                 )
@@ -209,10 +233,10 @@ fun MainScreen( navController: NavController
             {
                 Image(
                     modifier = Modifier
-                        .padding(start = 40.dp)
-                        .width(57.dp)
+                        .padding(start = 20.dp, end = 20.dp)
+                        .width(64.dp)
                         .height(80.dp),
-                    painter = painterResource(id = R.drawable.konsel),
+                    painter = painterResource(id = R.drawable.konsel_new),
                     contentDescription = "image description",
                     contentScale = ContentScale.None
                 )
@@ -225,10 +249,10 @@ fun MainScreen( navController: NavController
             {
                 Image(
                     modifier = Modifier
-                        .padding(start = 40.dp)
-                        .width(57.dp)
+                        .padding(start = 20.dp, end = 20.dp)
+                        .width(64.dp)
                         .height(80.dp),
-                    painter = painterResource(id = R.drawable.jurnal),
+                    painter = painterResource(id = R.drawable.jurnal_new),
                     contentDescription = "image description",
                     contentScale = ContentScale.None
                 )
@@ -241,17 +265,22 @@ fun MainScreen( navController: NavController
             {
                 Image(
                     modifier = Modifier
-                        .padding(start = 40.dp)
-                        .width(57.dp)
+                        .padding(start = 20.dp, end = 20.dp)
+                        .width(64.dp)
                         .height(80.dp),
-                    painter = painterResource(id = R.drawable.profile),
+                    painter = painterResource(id = R.drawable.profile_new),
                     contentDescription = "image description",
                     contentScale = ContentScale.None
                 )
             }
         }
+
     }
+
+
 }
+
+
 
 @Preview(showBackground = true)
 @Composable

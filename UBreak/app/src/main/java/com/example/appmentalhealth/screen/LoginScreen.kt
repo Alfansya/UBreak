@@ -129,7 +129,7 @@ fun LoginScreen(
                 style = TextStyle(color = Color(0xFF43AE48)),
                 text = "Forgot Password?",
                 fontFamily = alegreyaFamily,
-                modifier = Modifier.padding(start = 40.dp, top = 15.dp, end = 30.dp, bottom = 15.dp)
+                modifier = Modifier.padding(start = 230.dp, top = 5.dp, end = 0.dp, bottom = 15.dp)
                     .clickable { navController.navigate(route = Screen.Forgot.route) }
             )
         }
