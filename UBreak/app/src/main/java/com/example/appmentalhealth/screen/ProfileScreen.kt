@@ -31,20 +31,14 @@ import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-
-data class UserData(
-    val fullname: String = "",
-    val email: String = "",
-    val nim: String = "",
-    val phoneNumber: String = ""
-)
-
+import com.example.appmentalhealth.data.UsersData
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun ProfileScreen(
+    userData: UsersData,
     navController: NavController
 ) {
-    var userData by remember { mutableStateOf(com.example.appmentalhealth.screen.UserData()) }
+    var userData by remember { mutableStateOf(userData) }
     val auth = FirebaseAuth.getInstance()
     val userId = auth.currentUser?.uid
 
@@ -54,7 +48,7 @@ fun ProfileScreen(
                 .get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
-                        userData = (document.toObject(com.example.appmentalhealth.screen.UserData::class.java) ?: com.example.appmentalhealth.screen.UserData())
+                        userData = (document.toObject(userData::class.java) ?: userData)
                         Log.d("ProfileScreen", "Data loaded: $userData")
                     } else {
                         Log.d("ProfileScreen", "No document found")
@@ -351,7 +345,8 @@ fun ProfileScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewProfileScreen() {
-        ProfileScreen(
-            navController = rememberNavController()
-        )
+    ProfileScreen(
+        userData = UsersData(),
+        navController = rememberNavController()
+    )
 }
