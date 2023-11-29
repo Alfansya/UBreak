@@ -123,8 +123,19 @@ fun SetupNavGraph(
         ){
             SignScreen(navController)
         }
-
-
-    }
-}
+        composable(
+            route = Screen.Forgot.route
+        ){
+            ForgotScreen(navController)
+        }
+        composable(
+            route = Screen.Logout.route
+        ){
+            LogoutScreen(navController, onDismiss = { /*TODO*/ }) {
+                
+            }
+        }
+                
+            } 
+        }
 
