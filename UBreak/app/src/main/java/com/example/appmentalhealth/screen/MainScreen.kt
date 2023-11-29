@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -16,10 +17,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
+import com.example.appmentalhealth.data.UserViewModel
 import com.example.appmentalhealth.ui.theme.AppMentalHealthTheme
 import com.example.appmentalhealth.ui.theme.Green1
 import com.example.appmentalhealth.ui.theme.Green2
@@ -27,10 +30,12 @@ import com.example.appmentalhealth.ui.theme.Green7
 import com.example.appmentalhealth.ui.theme.White
 import com.example.appmentalhealth.ui.theme.alegreyaFamily
 
+
 @Composable
 fun MainScreen( navController: NavController
 ) {
-
+    val viewModel: UserViewModel = viewModel()
+    val userName by viewModel.userName.observeAsState("Loading...")
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,7 +60,7 @@ fun MainScreen( navController: NavController
 
         // Welcome User
         Text(
-            text = "Hello, Nama!",
+            text = "Hello, $userName!",
             fontFamily = alegreyaFamily,
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp,

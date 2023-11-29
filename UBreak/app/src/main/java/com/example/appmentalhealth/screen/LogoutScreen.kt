@@ -1,32 +1,23 @@
 package com.example.appmentalhealth.screen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
-import androidx.compose.runtime.*
 
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.material.AlertDialog
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -34,7 +25,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -44,14 +34,15 @@ import com.example.appmentalhealth.R
 import com.example.appmentalhealth.ui.theme.Green4
 import com.example.appmentalhealth.ui.theme.White
 import com.example.appmentalhealth.ui.theme.alegreyaFamily
+import com.google.firebase.auth.FirebaseAuth
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LogoutScreen(
     navController: NavController,
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
+    val auth = FirebaseAuth.getInstance() // Initialize Firebase Authentication
 
     Dialog(
         onDismissRequest = {
@@ -75,7 +66,6 @@ fun LogoutScreen(
                     .padding(5.dp),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally,
-
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.dialogue),
@@ -100,13 +90,13 @@ fun LogoutScreen(
                     .width(210.dp)
                     .height(35.dp)
                     .clip(RoundedCornerShape(5.dp)),
-                )
-                {
+                ) {
                     Button(
                         onClick = {
-                                  onConfirm
+                            // Sign out the user
+                            auth.signOut()
+                            onConfirm()
                             navController.navigate("login_screen")
-
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -114,11 +104,13 @@ fun LogoutScreen(
                             .padding(1.dp),
                         colors = ButtonDefaults.buttonColors(Green4)
                     ) {
-                        Text(text = "Yes, Log Me Out",
+                        Text(
+                            text = "Yes, Log Me Out",
                             fontFamily = alegreyaFamily,
                             fontWeight = FontWeight.Thin,
                             fontSize = 14.sp,
-                            color = White,)
+                            color = White,
+                        )
                     }
                 }
                 Row(
@@ -127,7 +119,7 @@ fun LogoutScreen(
                 ) {
                     Button(
                         onClick = {
-                                  onConfirm()
+                            onDismiss()
                             navController.popBackStack()
                         },
                         modifier = Modifier
@@ -136,15 +128,18 @@ fun LogoutScreen(
                             .padding(0.dp),
                         colors = ButtonDefaults.buttonColors(White)
                     ) {
-                        Text(text = "Naah, Just Kidding",
+                        Text(
+                            text = "No, Take Me Back",
                             fontFamily = alegreyaFamily,
                             fontWeight = FontWeight.Thin,
                             fontSize = 14.sp,
-                            color = Green4,)
+                            color = Green4,
+                        )
                     }
                 }
             }
-            }
         }
     }
+}
+
 

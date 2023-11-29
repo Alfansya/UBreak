@@ -19,7 +19,6 @@ sealed class Screen(val route: String){
     object Conseling5: Screen(route = "conseling5_screen")
     object Profile: Screen(route = "profile_screen")
     object ProfileEdit: Screen(route = "profileedit_screen")
-    object Profile2: Screen(route = "profile2_screen")
     object Profile3: Screen(route = "profile3_screen")
     object Sign: Screen(route = "sign_screen")
     object Forgot: Screen(route="forgot_screen")

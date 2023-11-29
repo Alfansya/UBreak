@@ -104,11 +104,7 @@ fun SetupNavGraph(
         composable(
             route = Screen.Profile.route
         ) {
-
-            ProfileScreen(
-                navController = rememberNavController(),
-                userData = UsersData()
-            )
+            ProfileScreen(UsersData(), navController)
         }
         composable(
             route = Screen.ProfileEdit.route
@@ -116,14 +112,13 @@ fun SetupNavGraph(
             val viewModel = viewModel<UserViewModel>()
             ProfileEdit(
                 navController = rememberNavController(),
-                viewModel = viewModel
-            )
+                viewModel = viewModel)
         }
-        composable(
-            route = Screen.Profile2.route
-        ){
-            Profile2Screen(navController)
-        }
+//        composable(
+//            route = Screen.ResetPass.route
+//        ){
+//            ResetPass(navController)
+//        }
         composable(
             route = Screen.Profile3.route
         ){
@@ -143,10 +138,10 @@ fun SetupNavGraph(
             route = Screen.Logout.route
         ){
             LogoutScreen(navController, onDismiss = { /*TODO*/ }) {
-                
+
             }
         }
-                
-            } 
-        }
 
+
+    }
+}

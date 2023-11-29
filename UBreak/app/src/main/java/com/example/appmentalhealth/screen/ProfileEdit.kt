@@ -39,9 +39,7 @@ fun ProfileEdit(navController: NavController, viewModel: UserViewModel) {
     val userName = viewModel.userName.value
     val userEmail = viewModel.userEmail.value
 
-    // Variable to track if the profile update was successful
-    var showMessage by remember { mutableStateOf(false) }
-
+    // Variable to track if txhe profile update was successful
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -127,11 +125,7 @@ fun ProfileEdit(navController: NavController, viewModel: UserViewModel) {
 
                     userRef.update(updates)
                         .addOnSuccessListener {
-                            // Data updated successfully
-                            showMessage = true
-                            // Navigate to the profile page
-                            navController.navigate("profile")
-                        }
+                            com.example.appmentalhealth.navController.navigate(route = Screen.Profile.route)}
                         .addOnFailureListener { e ->
                             // Handle error
                             Log.e("ProfileEdit", "Error updating data", e)
@@ -151,20 +145,6 @@ fun ProfileEdit(navController: NavController, viewModel: UserViewModel) {
                 color = White
             )
         }
-
-        // Show a message if the profile update was successful
-        if (showMessage) {
-            Text(
-                text = "Profile updated successfully!",
-                textAlign = TextAlign.Center,
-                fontFamily = alegreyaFamily,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-                color = Green4,
-                modifier = Modifier.fillMaxWidth().padding(top = 10.dp)
-            )
-        }
-
         Spacer(modifier = Modifier.padding(20.dp))
     }
 }
