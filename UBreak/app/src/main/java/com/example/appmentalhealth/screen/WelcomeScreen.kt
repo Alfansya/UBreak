@@ -27,11 +27,22 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun WelcomeScreen(
     navController: NavController
 ) {
+//    // Check if the user is already logged in using Firebase Authentication
+//    val auth = FirebaseAuth.getInstance()
+//    val currentUser = auth.currentUser
+//
+//    // If the user is already logged in, navigate to the main screen
+//    if (currentUser != null) {
+//        navController.navigate(Screen.Main.route)
+//        return
+//    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
