@@ -55,16 +55,30 @@ fun LoginScreen(
             .padding(0.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        // Gambar
-        Image(
-            painter = painterResource(id = R.drawable.group3149),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(350.dp)
-                .clip(shape = MaterialTheme.shapes.medium),
-            contentScale = ContentScale.FillBounds
-        )
+
+        Box(contentAlignment = Alignment.Center) {
+            // Base Image
+            Image(
+                painter = painterResource(id = R.drawable.basewave), // Replace with your base image resource
+                contentDescription = "Base Image",
+                modifier = Modifier.align(Alignment.Center)
+                    .fillMaxWidth()
+                    .height(350.dp)
+                    .clip(shape = MaterialTheme.shapes.medium),
+                contentScale = ContentScale.FillBounds
+            )
+
+            // Overlay Image
+            Image(
+                painter = painterResource(id = R.drawable.title), // Replace with your overlay image resource
+                contentDescription = "Overlay Image",
+                modifier = Modifier.align(Alignment.Center)
+                    .width(285.dp)
+                    .height(189 .dp)
+                    .clip(shape = MaterialTheme.shapes.medium),
+                contentScale = ContentScale.FillBounds
+            )
+        }
 
         // Title
         Text(
