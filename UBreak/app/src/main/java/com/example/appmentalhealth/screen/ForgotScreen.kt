@@ -43,18 +43,18 @@ fun ForgotScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(0.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         // Image
         Image(
             painter = painterResource(id = R.drawable.group3149),
-            contentDescription = "App Logo",
+            contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .padding(16.dp),
-            contentScale = ContentScale.Fit
+                .height(350.dp)
+                .clip(shape = MaterialTheme.shapes.medium),
+            contentScale = ContentScale.FillBounds
         )
 
         // Title
