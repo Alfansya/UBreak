@@ -23,5 +23,6 @@ sealed class Screen(val route: String){
     object Sign: Screen(route = "sign_screen")
     object Forgot: Screen(route="forgot_screen")
     object Logout: Screen(route = "logout_screen")
+    object Reset: Screen(route = "reset_screen")
 
 }

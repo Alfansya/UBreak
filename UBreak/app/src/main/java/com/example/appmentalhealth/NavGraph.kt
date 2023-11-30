@@ -141,7 +141,13 @@ fun SetupNavGraph(
 
             }
         }
+        composable(
+            route = Screen.Reset.route
+        ){
+            ResetScreen(navController, onDismiss = { /*TODO*/ }) {
 
+            }
+        }
 
     }
 }
