@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -61,29 +59,6 @@ fun ProfileScreen(
                 }
         } ?: Log.d("ProfileScreen", "User ID is null")
     }
-    fun performPasswordReset() {
-        // Implement your password reset logic here
-        // If the reset is successful, set showDialog to true
-        // If the reset fails, handle the error
-        // For example, you can use Firebase Authentication to send a password reset email
-        val auth = FirebaseAuth.getInstance()
-        val userEmail = auth.currentUser?.email
-        userEmail?.let { email ->
-            auth.sendPasswordResetEmail(email)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Password reset email sent successfully
-                        showDialog = true
-                    } else {
-                        // Handle the error here
-                        // You can log the error or show an error message
-                        val exception = task.exception
-                        Log.e("ProfileScreen", "Password reset failed: $exception")
-                    }
-                }
-        }
-    }
-
 
     Column(
         modifier = Modifier
@@ -199,7 +174,8 @@ fun ProfileScreen(
                     .padding(20.dp)
                     .padding(top = 70.dp)
                     .width(200.dp)
-                    .clickable { performPasswordReset() }
+                    .clickable { navController.navigate(route = Screen.Reset.route)}
+
             )
             {
                 Image(
@@ -210,30 +186,6 @@ fun ProfileScreen(
                         .fillMaxHeight(),
                     contentScale = ContentScale.Crop
                 )
-                if (showDialog) {
-                    AlertDialog(
-
-                        onDismissRequest = {
-                            showDialog = false
-                        },
-                        title = {
-                            Text("Password Reset Link Sent")
-                        },
-                        text = {
-                            Text("A password reset link has been sent to your email address. Please check your inbox and follow the instructions to reset your password.")
-                        },
-                        confirmButton = {
-                            Button(
-                                onClick = {
-                                    showDialog = false
-                                }
-                            ) {
-                                Text("OK")
-
-                            }
-                        },
-                    )
-                }
             }
 
             Box(
