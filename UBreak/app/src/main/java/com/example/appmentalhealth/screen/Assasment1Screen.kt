@@ -1,6 +1,7 @@
 package com.example.appmentalhealth.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -32,6 +33,7 @@ import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.Green4
 import com.example.appmentalhealth.ui.theme.White
 import com.example.appmentalhealth.ui.theme.alegreyaFamily
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 fun Assasment1Screen(navController: NavController) {
@@ -48,24 +50,31 @@ fun Assasment1Screen(navController: NavController) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(50.dp),
+                .fillMaxHeight()
+                .padding(20.dp),
+            horizontalArrangement = Arrangement.Center, // Ratakan horizontal
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 modifier =Modifier
-                    .padding(end = 40.dp),
+                    .width(50.dp)
+                    .padding(end = 20.dp)
+                    .clickable { navController.navigate(route = Screen.Main.route) },
                 painter = painterResource(id = R.drawable.maskgroup),
                 contentDescription = "image description",
-                contentScale = ContentScale.None
+                contentScale = ContentScale.Crop
             )
 
             Image(
                 modifier = Modifier
-                    .padding(5.dp),
-                painter = painterResource(id = R.drawable.bar),
+                    .width(260.dp)
+                    .clip(RoundedCornerShape(15.dp)),
+                painter = painterResource(id = R.drawable.progresss),
                 contentDescription = "image description",
-                contentScale = ContentScale.None
+                contentScale = ContentScale.FillBounds
+
             )
-            
+
         }
         Row(
             modifier = Modifier
@@ -114,6 +123,7 @@ fun Assasment1Screen(navController: NavController) {
             .width(250.dp)
             .height(40.dp)
             .clip(RoundedCornerShape(50.dp)),
+            horizontalAlignment = Alignment.CenterHorizontally
         )
         {
             Button(

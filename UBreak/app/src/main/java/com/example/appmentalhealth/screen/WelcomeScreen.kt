@@ -38,7 +38,7 @@ fun WelcomeScreen(
     val auth = FirebaseAuth.getInstance()
     val currentUser = auth.currentUser
 
-    // If the user is already logged in, navigate to the main screen
+     //If the user is already logged in, navigate to the main screen
     if (currentUser != null) {
         navController.navigate(Screen.Main.route)
         return
