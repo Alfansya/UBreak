@@ -8,7 +8,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -22,7 +21,6 @@ import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
 import java.text.DateFormat
 import java.util.Calendar
-import java.util.Date
 
 @Composable
 fun JournalScreen( navController: NavController, date: String) {
@@ -52,11 +50,11 @@ fun JournalScreen( navController: NavController, date: String) {
 
         // Welcome User
         Text(
-            text = "Your journal this is your private space.",
+            text = "Write your feelings here...",
             fontFamily = alegreyaFamily,
             fontWeight = FontWeight.Bold,
-            fontSize = 30.sp,
-            textAlign = TextAlign.Center,
+            fontSize = 29.sp,
+            textAlign = TextAlign.Left,
             modifier = Modifier.padding(30.dp)
         )
         Text(text = "Date: $dateFormat")

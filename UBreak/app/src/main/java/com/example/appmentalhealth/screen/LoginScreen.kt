@@ -85,9 +85,9 @@ fun LoginScreen(
             text = "Sign In",
             fontFamily = alegreyaFamily,
             fontWeight = FontWeight.Bold,
-            fontSize = 30.sp,
+            fontSize = 38.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(vertical = 10.dp)
+            modifier = Modifier.padding(vertical = 8.dp)
         )
 
         // Label Email
@@ -134,19 +134,21 @@ fun LoginScreen(
                 style = TextStyle(color = Color(0xFF43AE48)),
                 text = "Forgot Password?",
                 fontFamily = alegreyaFamily,
-                modifier = Modifier.padding(start = 230.dp, top = 5.dp, end = 0.dp, bottom = 15.dp)
+                fontSize = 20.sp,
+                modifier = Modifier.padding(start = 200.dp, end = 0.dp, bottom = 15.dp)
                     .clickable { navController.navigate(route = Screen.Forgot.route) }
             )
         }
 
         Spacer(
-            modifier = Modifier.padding(50.dp)
+            modifier = Modifier.padding(63.dp)
         )
         // Button Sign In
         Column(modifier = Modifier
             .width(320.dp)
-            .height(40.dp)
-            .clip(RoundedCornerShape(50.dp)),
+            .height(60.dp)
+            .clip(RoundedCornerShape(15.dp)),
+            verticalArrangement = Arrangement.Bottom
             )
         {
             Button(
@@ -165,7 +167,7 @@ fun LoginScreen(
                 Text(text = "Sign In",
                     fontFamily = alegreyaFamily,
                     fontWeight = FontWeight.Thin,
-                    fontSize = 16.sp,
+                    fontSize = 24.sp,
                     color = White,)
             }
         }
@@ -175,6 +177,7 @@ fun LoginScreen(
         {
             Text(
                 text = "Don't have an account yet?",
+                fontSize = 18.sp,
                 fontFamily = alegreyaFamily,
             )
             Spacer(
@@ -183,8 +186,9 @@ fun LoginScreen(
             Text(
                 style = TextStyle(color = Color(0xFF43AE48)),
                 text = "Register",
+                fontSize = 18.sp,
                 fontFamily = alegreyaFamily,
-                modifier = Modifier.padding(3.dp)
+                modifier = Modifier
                     .clickable { navController.navigate(route = Screen.Sign.route) }
             )
         }
