@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color.Companion.Yellow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -98,11 +98,12 @@ fun AssasmentResultScreen(
                     modifier = Modifier
                         .padding(start = 110.dp)
                 )
+                val Orange = Color(0xFFFFA500)
                 Text(text = "Requires Professional Examination",
                     fontFamily = alegreyaFamily,
                     fontWeight = FontWeight.Medium,
                     fontSize = 20.sp,
-                    color = Yellow,
+                    color = Orange,
                     modifier = Modifier
                         .padding(start = 110.dp, top = 38.dp))
             }

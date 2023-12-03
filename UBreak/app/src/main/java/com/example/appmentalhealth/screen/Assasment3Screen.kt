@@ -115,7 +115,7 @@ fun Assasment3Screen(navController: NavController) {
                     .height(56.dp)
                     .selectable(
                         selected = selectedOption == option,
-                        onClick = { selectedOption = option }
+                        onClick = { selectedOption = option}
                     )
                     .padding(horizontal = 50.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -146,9 +146,20 @@ fun Assasment3Screen(navController: NavController) {
         {
             Button(
                 onClick = {
-                    navController.navigate(route = Screen.AssasmentResult.route)
-                    // Add your sign-in logic here
-                    // Example: Check email and password, navigate to the home screen
+                    when (selectedOption) {
+                        "Never", "A year ago" -> {
+                            navController.navigate(route = Screen.AssasmentResult3.route)
+                        }
+                        "3 months ago", "2 weeks ago" -> {
+                            navController.navigate(route = Screen.AssasmentResult.route)
+                        }
+                        "3 days ago", "Yesterday" -> {
+                            navController.navigate(route = Screen.AssasmentResult2.route)
+                        }
+                        else -> {
+                            navController.navigate(route = Screen.Assasment3.route)
+                        }
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
