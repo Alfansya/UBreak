@@ -265,82 +265,20 @@ fun ProfileScreen(
             modifier = Modifier
                 .padding(10.dp)
         )
-
-        Row(
-            modifier = Modifier
-                .padding(0.dp)
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(color = White),
-            horizontalArrangement = Arrangement.Center,
-        ) {
-            Box(
-                modifier = Modifier
-                    .clickable {
-                        navController.navigate(route = Screen.Main.route)
-                    }
-            ) {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 20.dp)
-                        .width(57.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.home),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-            Box(
-                modifier = Modifier
-                    .clickable { navController.navigate(route = Screen.Conseling.route) }
-            )
-            {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 40.dp)
-                        .width(57.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.konsel),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-
-            Box(
-                modifier = Modifier
-                    .clickable { navController.navigate(route = Screen.Journal.route) })
-            {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 40.dp)
-                        .width(57.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.jurnal),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-
-            Box(
-                modifier = Modifier
-                    .clickable { navController.navigate(route = Screen.Profile.route) })
-            {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 40.dp)
-                        .width(57.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.profile),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-        }
     }
+
+    // Bottom Navigation Bar
+    BottomBarRow(
+        items = listOf(
+            BottomNavItem(route = Screen.Main.route, iconResId = R.drawable.home_new),
+            BottomNavItem(route = Screen.Conseling.route, iconResId = R.drawable.konsel_new),
+            BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_new),
+            BottomNavItem(route = Screen.Profile.route, iconResId = R.drawable.profile_new)
+        ),
+        navController = navController
+    )
 }
+
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Preview(showBackground = true)
