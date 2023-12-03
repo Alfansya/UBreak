@@ -1,4 +1,8 @@
 package com.example.appmentalhealth.screen
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,12 +34,13 @@ import com.example.appmentalhealth.ui.theme.Green7
 import com.example.appmentalhealth.ui.theme.White
 import com.example.appmentalhealth.ui.theme.alegreyaFamily
 
-
 @Composable
-fun MainScreen( navController: NavController
+fun MainScreen(
+    navController: NavController
 ) {
     val viewModel: UserViewModel = viewModel()
     val userName by viewModel.userName.observeAsState("Loading...")
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,8 +50,7 @@ fun MainScreen( navController: NavController
             .background(color = Green7),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier
-            .padding(20.dp))
+        Spacer(modifier = Modifier.padding(20.dp))
         // Gambar
         Image(
             painter = painterResource(id = R.drawable.iconmenu),
@@ -72,7 +76,7 @@ fun MainScreen( navController: NavController
             style = TextStyle(textAlign = TextAlign.Start)
         )
         Text(
-            text = "How are you feeling today!" ,
+            text = "How are you feeling today!",
             fontFamily = alegreyaFamily,
             fontWeight = FontWeight.Thin,
             fontSize = 20.sp,
@@ -142,8 +146,6 @@ fun MainScreen( navController: NavController
                 .clip(RoundedCornerShape(25.dp))
                 .background(color = White),
             horizontalAlignment = Alignment.CenterHorizontally
-
-
         ) {
             Text(
                 modifier = Modifier
@@ -157,27 +159,19 @@ fun MainScreen( navController: NavController
                 style = TextStyle(textAlign = TextAlign.Start)
             )
 
-            Box(modifier = Modifier
-            .clickable {
-                navController.navigate(route = Screen.Assasment.route)
-            }) {
-
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .padding(20.dp),
-                painter = painterResource(id = R.drawable.self_new),
-                contentDescription = "image description",
-                contentScale = ContentScale.None
-            )
+            Box(modifier = Modifier.clickable { navController.navigate(route = Screen.Assasment.route) }) {
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(20.dp),
+                    painter = painterResource(id = R.drawable.self_new),
+                    contentDescription = "image description",
+                    contentScale = ContentScale.None
+                )
             }
 
-            Box(modifier = Modifier
-                .clickable {
-                    navController.navigate(route = Screen.Journal.route)
-                })
-            {
+            Box(modifier = Modifier.clickable { navController.navigate(route = Screen.Journal.route) }) {
                 Image(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -189,11 +183,7 @@ fun MainScreen( navController: NavController
                 )
             }
 
-            Box(modifier = Modifier
-                .clickable {
-                    navController.navigate(route = Screen.Conseling.route)
-                })
-            {
+            Box(modifier = Modifier.clickable { navController.navigate(route = Screen.Conseling.route) }) {
                 Image(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -205,87 +195,59 @@ fun MainScreen( navController: NavController
                 )
             }
         }
+    }
 
-        Row(
-            modifier = Modifier
-                .background(color = Color.White)
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(16.dp),
-            verticalAlignment = Alignment.Bottom
-        ) {
+    // Bottom Navigation Bar
+    BottomBarRow(
+        items = listOf(
+            BottomNavItem(route = Screen.Main.route, iconResId = R.drawable.home_new),
+            BottomNavItem(route = Screen.Conseling.route, iconResId = R.drawable.konsel_new),
+            BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_new),
+            BottomNavItem(route = Screen.Profile.route, iconResId = R.drawable.profile_new)
+        ),
+        navController = navController
+    )
+
+}
+
+@Composable
+fun BottomBarRow(
+    items: List<BottomNavItem>,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.Bottom
+    ) {
+        items.forEach { item ->
             Box(
                 modifier = Modifier
+                    .height(80.dp)
+                    .background(color = Color.White)
                     .clickable {
-                        navController.navigate(route = Screen.Main.route)
+                        navController.navigate(route = item.route)
                     }
-
-            ){
+            ) {
                 Image(
                     modifier = Modifier
-                        .width(64.dp)
+                        .width(105.dp)
                         .height(80.dp),
-                    painter = painterResource(id = R.drawable.home_new),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-            Box(
-                modifier = Modifier
-                    .clickable { navController.navigate(route = Screen.Conseling.route)}
-            )
-            {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 20.dp, end = 20.dp)
-                        .width(64.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.konsel_new),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-
-            Box(
-                modifier = Modifier
-                    .clickable { navController.navigate(route = Screen.Journal.route)})
-            {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 20.dp, end = 20.dp)
-                        .width(64.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.jurnal_new),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-
-            Box(
-                modifier = Modifier
-                    .clickable { navController.navigate(route = Screen.Profile.route) })
-            {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 20.dp, end = 20.dp)
-                        .width(64.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.profile_new),
+                    painter = painterResource(id = item.iconResId),
                     contentDescription = "image description",
                     contentScale = ContentScale.None
                 )
             }
         }
-
     }
-
-
 }
 
 
+data class BottomNavItem(
+    val route: String,
+    val iconResId: Int
+)
 
 @Preview(showBackground = true)
 @Composable
