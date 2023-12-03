@@ -127,12 +127,12 @@ fun Assasment2Screen(navController: NavController) {
                 Text(
                     text = option,
                     fontFamily = alegreyaFamily,
-                    fontWeight = FontWeight.Thin,
-                    fontSize = 20.sp,
-                    modifier = Modifier.padding(start = 16.dp)
-                )
+                        fontWeight = FontWeight.Thin,
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
             }
-        }
 
         Spacer(
             modifier = Modifier.padding(140.dp)

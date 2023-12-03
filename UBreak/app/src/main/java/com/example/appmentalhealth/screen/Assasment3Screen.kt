@@ -146,7 +146,7 @@ fun Assasment3Screen(navController: NavController) {
         {
             Button(
                 onClick = {
-                    navController.navigate(route = Screen.Assasment1.route)
+                    navController.navigate(route = Screen.AssasmentResult.route)
                     // Add your sign-in logic here
                     // Example: Check email and password, navigate to the home screen
                 },

@@ -148,6 +148,16 @@ fun SetupNavGraph(
 
             }
         }
+        composable(
+            route = Screen.AssasmentResult2.route
+        ){
+            AssasmentResult2Screen(navController)
+        }
+        composable(
+            route = Screen.AssasmentResult3.route
+        ){
+            AssasmentResult3Screen(navController)
+        }
 
     }
 }

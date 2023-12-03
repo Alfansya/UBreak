@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color.Companion.Yellow
+import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,7 +28,7 @@ import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
 
 @Composable
-fun AssasmentResultScreen(
+fun AssasmentResult3Screen(
     navController: NavController
 ) {
     Column(
@@ -76,7 +76,7 @@ fun AssasmentResultScreen(
                         .padding(0.dp)
                         .zIndex(1f)
                         .offset(x = 5.dp, y = (5).dp),
-                    painter = painterResource(id = R.drawable.brain),
+                    painter = painterResource(id = R.drawable.green),
                     contentDescription = "image description",
                     contentScale = ContentScale.FillBounds
                 )
@@ -98,13 +98,13 @@ fun AssasmentResultScreen(
                     modifier = Modifier
                         .padding(start = 110.dp)
                 )
-                Text(text = "Requires Professional Examination",
+                Text(text = "Good Condition",
                     fontFamily = alegreyaFamily,
                     fontWeight = FontWeight.Medium,
                     fontSize = 20.sp,
-                    color = Yellow,
+                    color = Green,
                     modifier = Modifier
-                        .padding(start = 110.dp, top = 38.dp))
+                        .padding(start = 110.dp, top = 45.dp))
             }
         }
         Card(
@@ -116,7 +116,7 @@ fun AssasmentResultScreen(
             shape = RoundedCornerShape(16.dp)
         ){
             Text(
-                text = "Based on the answer you provided, it seems like your mental condition is currently not in a good state and has the potential to cause difficulties in carrying out daily activities.",
+                text = "Based on the answers you provided, it seems that your current mental condition is very good and does not cause difficulties in carrying out daily activities.",
                 fontFamily = alegreyaFamily,
                 fontWeight = FontWeight.Thin,
                 fontSize = 16.sp,
@@ -133,7 +133,7 @@ fun AssasmentResultScreen(
             )
 
         }
-Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(20.dp))
         Button(
             onClick = {
                 navController.navigate(route = Screen.Main.route)
@@ -161,7 +161,7 @@ Spacer(modifier = Modifier.padding(20.dp))
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewAssasmentResultScreen() {
-        AssasmentResultScreen( navController = rememberNavController()
-        )
+fun PreviewAssasmentResult3Screen() {
+    AssasmentResult3Screen( navController = rememberNavController()
+    )
 }
