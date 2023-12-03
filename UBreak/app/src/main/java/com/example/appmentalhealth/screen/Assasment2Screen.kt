@@ -1,6 +1,7 @@
 package com.example.appmentalhealth.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -25,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
@@ -48,24 +50,49 @@ fun Assasment2Screen(navController: NavController) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(50.dp),
+                .fillMaxHeight()
+                .padding(20.dp),
+            horizontalArrangement = Arrangement.Center, // Ratakan horizontal
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                modifier =Modifier
-                    .padding(end = 40.dp),
+                modifier = Modifier
+                    .width(50.dp)
+                    .padding(end = 20.dp)
+                    .offset(x = (-20).dp)
+                    .clickable { navController.navigate(route = Screen.Main.route) },
                 painter = painterResource(id = R.drawable.maskgroup),
                 contentDescription = "image description",
-                contentScale = ContentScale.None
+                contentScale = ContentScale.Crop
             )
 
-            Image(
+            Box(
                 modifier = Modifier
-                    .padding(5.dp),
-                painter = painterResource(id = R.drawable.bar),
-                contentDescription = "image description",
-                contentScale = ContentScale.None
-            )
-            
+                    .width(260.dp)
+                    .padding(end = 20.dp)
+                    .offset(x = (-25).dp)
+            ) {
+                Image(
+                    modifier = Modifier
+                        .width(130.dp)
+                        .clip(RoundedCornerShape(15.dp))
+                        .zIndex(1f)
+                        .offset(x = 20.dp),
+                    painter = painterResource(id = R.drawable.progresshalf),
+                    contentDescription = "image description",
+                    contentScale = ContentScale.Crop
+                )
+
+                Image(
+                    modifier = Modifier
+                        .width(260.dp)
+                        .clip(RoundedCornerShape(15.dp))
+                        .offset(x = 20.dp),
+                    painter = painterResource(id = R.drawable.progresss),
+                    contentDescription = "image description",
+                    contentScale = ContentScale.Crop
+                )
+            }
         }
         Row(
             modifier = Modifier

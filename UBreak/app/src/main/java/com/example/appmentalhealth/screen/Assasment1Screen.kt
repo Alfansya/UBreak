@@ -33,7 +33,6 @@ import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.Green4
 import com.example.appmentalhealth.ui.theme.White
 import com.example.appmentalhealth.ui.theme.alegreyaFamily
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 fun Assasment1Screen(navController: NavController) {
@@ -56,9 +55,10 @@ fun Assasment1Screen(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                modifier =Modifier
+                modifier = Modifier
                     .width(50.dp)
                     .padding(end = 20.dp)
+                    .offset(x = (-20).dp)
                     .clickable { navController.navigate(route = Screen.Main.route) },
                 painter = painterResource(id = R.drawable.maskgroup),
                 contentDescription = "image description",
@@ -68,10 +68,12 @@ fun Assasment1Screen(navController: NavController) {
             Image(
                 modifier = Modifier
                     .width(260.dp)
-                    .clip(RoundedCornerShape(15.dp)),
+                    .clip(RoundedCornerShape(15.dp))
+                    .padding(end = 20.dp)
+                    .offset(x = (-25).dp),
                 painter = painterResource(id = R.drawable.progresss),
                 contentDescription = "image description",
-                contentScale = ContentScale.FillBounds
+                contentScale = ContentScale.Crop
 
             )
 
