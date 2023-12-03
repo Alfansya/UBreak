@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
@@ -209,19 +211,23 @@ fun MainScreen(
     )
 
 }
-
 @Composable
 fun BottomBarRow(
     items: List<BottomNavItem>,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
+    val currentRoute = getCurrentRoute(navController)
+
     Row(
         modifier = modifier
             .fillMaxWidth(),
         verticalAlignment = Alignment.Bottom
     ) {
         items.forEach { item ->
+            val isSelected = item.route == currentRoute
+            val alphaValue = if (isSelected) 1.0f else 0.5f
+
             Box(
                 modifier = Modifier
                     .height(80.dp)
@@ -233,7 +239,8 @@ fun BottomBarRow(
                 Image(
                     modifier = Modifier
                         .width(105.dp)
-                        .height(80.dp),
+                        .height(80.dp)
+                        .alpha(alphaValue),
                     painter = painterResource(id = item.iconResId),
                     contentDescription = "image description",
                     contentScale = ContentScale.None
@@ -241,6 +248,12 @@ fun BottomBarRow(
             }
         }
     }
+}
+
+@Composable
+fun getCurrentRoute(navController: NavController): String {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    return navBackStackEntry?.destination?.route ?: ""
 }
 
 
