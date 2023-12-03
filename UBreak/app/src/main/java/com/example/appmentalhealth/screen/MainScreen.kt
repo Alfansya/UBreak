@@ -1,4 +1,8 @@
 package com.example.appmentalhealth.screen
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -7,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -19,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
@@ -30,12 +36,13 @@ import com.example.appmentalhealth.ui.theme.Green7
 import com.example.appmentalhealth.ui.theme.White
 import com.example.appmentalhealth.ui.theme.alegreyaFamily
 
-
 @Composable
-fun MainScreen( navController: NavController
+fun MainScreen(
+    navController: NavController
 ) {
     val viewModel: UserViewModel = viewModel()
     val userName by viewModel.userName.observeAsState("Loading...")
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,8 +52,7 @@ fun MainScreen( navController: NavController
             .background(color = Green7),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier
-            .padding(20.dp))
+        Spacer(modifier = Modifier.padding(20.dp))
         // Gambar
         Image(
             painter = painterResource(id = R.drawable.iconmenu),
@@ -72,7 +78,7 @@ fun MainScreen( navController: NavController
             style = TextStyle(textAlign = TextAlign.Start)
         )
         Text(
-            text = "How are you feeling today!" ,
+            text = "How are you feeling today!",
             fontFamily = alegreyaFamily,
             fontWeight = FontWeight.Thin,
             fontSize = 20.sp,
@@ -142,8 +148,6 @@ fun MainScreen( navController: NavController
                 .clip(RoundedCornerShape(25.dp))
                 .background(color = White),
             horizontalAlignment = Alignment.CenterHorizontally
-
-
         ) {
             Text(
                 modifier = Modifier
@@ -157,27 +161,19 @@ fun MainScreen( navController: NavController
                 style = TextStyle(textAlign = TextAlign.Start)
             )
 
-            Box(modifier = Modifier
-            .clickable {
-                navController.navigate(route = Screen.Assasment.route)
-            }) {
-
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .padding(20.dp),
-                painter = painterResource(id = R.drawable.self_new),
-                contentDescription = "image description",
-                contentScale = ContentScale.None
-            )
+            Box(modifier = Modifier.clickable { navController.navigate(route = Screen.Assasment.route) }) {
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(20.dp),
+                    painter = painterResource(id = R.drawable.self_new),
+                    contentDescription = "image description",
+                    contentScale = ContentScale.None
+                )
             }
 
-            Box(modifier = Modifier
-                .clickable {
-                    navController.navigate(route = Screen.Journal.route)
-                })
-            {
+            Box(modifier = Modifier.clickable { navController.navigate(route = Screen.Journal.route) }) {
                 Image(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -189,11 +185,7 @@ fun MainScreen( navController: NavController
                 )
             }
 
-            Box(modifier = Modifier
-                .clickable {
-                    navController.navigate(route = Screen.Conseling.route)
-                })
-            {
+            Box(modifier = Modifier.clickable { navController.navigate(route = Screen.Conseling.route) }) {
                 Image(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -205,87 +197,70 @@ fun MainScreen( navController: NavController
                 )
             }
         }
+    }
 
-        Row(
-            modifier = Modifier
-                .background(color = Color.White)
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(16.dp),
-            verticalAlignment = Alignment.Bottom
-        ) {
+    // Bottom Navigation Bar
+    BottomBarRow(
+        items = listOf(
+            BottomNavItem(route = Screen.Main.route, iconResId = R.drawable.home_new),
+            BottomNavItem(route = Screen.Conseling.route, iconResId = R.drawable.konsel_new),
+            BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_new),
+            BottomNavItem(route = Screen.Profile.route, iconResId = R.drawable.profile_new)
+        ),
+        navController = navController
+    )
+
+}
+@Composable
+fun BottomBarRow(
+    items: List<BottomNavItem>,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
+    val currentRoute = getCurrentRoute(navController)
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.Bottom
+    ) {
+        items.forEach { item ->
+            val isSelected = item.route == currentRoute
+            val alphaValue = if (isSelected) 1.0f else 0.5f
+
             Box(
                 modifier = Modifier
+                    .height(80.dp)
+                    .background(color = Color.White)
                     .clickable {
-                        navController.navigate(route = Screen.Main.route)
+                        navController.navigate(route = item.route)
                     }
-
-            ){
+            ) {
                 Image(
                     modifier = Modifier
-                        .width(64.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.home_new),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-            Box(
-                modifier = Modifier
-                    .clickable { navController.navigate(route = Screen.Conseling.route)}
-            )
-            {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 20.dp, end = 20.dp)
-                        .width(64.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.konsel_new),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-
-            Box(
-                modifier = Modifier
-                    .clickable { navController.navigate(route = Screen.Journal.route)})
-            {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 20.dp, end = 20.dp)
-                        .width(64.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.jurnal_new),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-
-            Box(
-                modifier = Modifier
-                    .clickable { navController.navigate(route = Screen.Profile.route) })
-            {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 20.dp, end = 20.dp)
-                        .width(64.dp)
-                        .height(80.dp),
-                    painter = painterResource(id = R.drawable.profile_new),
+                        .width(105.dp)
+                        .height(80.dp)
+                        .alpha(alphaValue),
+                    painter = painterResource(id = item.iconResId),
                     contentDescription = "image description",
                     contentScale = ContentScale.None
                 )
             }
         }
-
     }
+}
 
-
+@Composable
+fun getCurrentRoute(navController: NavController): String {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    return navBackStackEntry?.destination?.route ?: ""
 }
 
 
+data class BottomNavItem(
+    val route: String,
+    val iconResId: Int
+)
 
 @Preview(showBackground = true)
 @Composable
