@@ -17,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -88,11 +89,6 @@ fun ProfileScreen(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(
-            modifier = Modifier
-                .padding(10.dp)
-        )
-
         Text(
             text = "Profile",
             fontFamily = alegreyaFamily,
@@ -105,9 +101,10 @@ fun ProfileScreen(
 //        //detail profile
         Card(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 5.dp)
                 .fillMaxWidth()
-                .wrapContentHeight(),
+                .wrapContentHeight()
+                .offset(y = (-15).dp),
             shape = RoundedCornerShape(10.dp),
             backgroundColor = Green4
         ) {
@@ -163,19 +160,13 @@ fun ProfileScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)
+                .offset(y = (-20).dp)
         )
-
-        Card(
-            modifier = Modifier
-                .border(1.dp, color = Color.Black)
-                .width(350.dp)
-                .fillMaxHeight(),
-        )
-        {
             Box(
                 Modifier
                     .padding(20.dp)
-                    .width(200.dp)
+                    .width(350.dp)
+                    .offset(y = (-20).dp)
                     .clickable { navController.navigate(route = Screen.ProfileEdit.route) }
             )
             {
@@ -188,9 +179,10 @@ fun ProfileScreen(
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .offset(y=(-40).dp)
                                 .clickable(onClick = menuItem.onClick)
-                                .padding(vertical = 8.dp),
-                            shape = RoundedCornerShape(10.dp)
+                                .padding(vertical = 8.dp)
+                                .shadow(elevation = 10.dp, shape = RoundedCornerShape(10.dp), clip = true),
                         ) {
                             Row(
                                 modifier = Modifier
@@ -235,7 +227,6 @@ fun ProfileScreen(
                     }
                 }
             }
-        }
 
         Text(
             text = "More",
@@ -245,34 +236,29 @@ fun ProfileScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)
+                .offset(y = (-90).dp)
         )
-
-        Card(
-            modifier = Modifier
-                .border(1.dp, color = Color.Black)
-                .width(350.dp)
-                .fillMaxHeight(),
-        )
-        {
             Box(
                 Modifier
                     .padding(20.dp)
-                    .width(200.dp)
+                    .width(380.dp)
                     .clickable { navController.navigate(route = Screen.ProfileEdit.route) }
             )
             {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .offset(y= (-80).dp)
                 ) {
                     // Loop through each menu item and create a row
                     moreItems.forEach { menuItem ->
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .offset(y=(-50).dp)
                                 .clickable(onClick = menuItem.onClick)
-                                .padding(vertical = 8.dp),
-                            shape = RoundedCornerShape(10.dp)
+                                .padding(vertical = 8.dp)
+                                .shadow(elevation = 10.dp, shape = RoundedCornerShape(10.dp), clip = true),
                         ) {
                             Row(
                                 modifier = Modifier
@@ -317,7 +303,6 @@ fun ProfileScreen(
                     }
                 }
             }
-        }
         Spacer(
             modifier = Modifier
                 .padding(10.dp)
