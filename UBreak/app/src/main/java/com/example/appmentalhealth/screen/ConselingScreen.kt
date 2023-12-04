@@ -43,7 +43,7 @@ fun ConselingScreen(
             alignment = Alignment.Center,
             contentDescription = null,
             modifier = Modifier
-                .padding(top = 60.dp)
+                .padding(top = 10.dp)
                 .fillMaxWidth()
                 .fillMaxHeight()
                 .background(color = White)
@@ -52,19 +52,14 @@ fun ConselingScreen(
         )
             // Title
             Text(
-                text = "Lorem ipsum dolor sit amet, " +
-                        "consectetur adipiscing elit. " +
-                        "Nulla faucibus a nulla id maximus. " +
-                        "Morbi aliquet, quam a imperdiet pretium, " +
-                        "dolor ex commodo lectus, nec sagittis elit sem vel leo. " +
-                        "Pellentesque in tortor condimentum, placerat lorem non, viverra neque. " +
-                        "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. Duis convallis placerat nibh, eu viverra nisi sollicitudin posuere. Fusce sed mollis lacus, at auctor turpis. Integer rhoncus pretium sem eget rutrum. Fusce dignissim turpis tellus, eget facilisis sapien elementum nec.",
+                text =  "Please schedule your counseling session now. Counseling is a planned meeting with the goal of providing emotional support, guidance, or problem-solving. By scheduling counseling now, you can ensure that the time is tailored to your needs and availability, allowing you to take positive steps in supporting your well-being and personal growth. Proactively planning a counseling session also provides an opportunity to focus on specific aspects you want to explore or address, enhancing the effectiveness and meaningfulness of the counseling experience.",
                 fontFamily = alegreyaFamily,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(40.dp)
+                textAlign = TextAlign.Justify,
+                modifier = Modifier.padding(20.dp)
             )
+        Spacer(modifier = Modifier.padding(10.dp))
 
         Column(modifier = Modifier
             .width(250.dp)
@@ -74,7 +69,7 @@ fun ConselingScreen(
         {
             Button(
                 onClick = {
-                    navController.navigate(route = Screen.Conseling1.route)
+                    navController.navigate(route = Screen.Conseling2.route)
                     // Add your sign-in logic here
                     // Example: Check email and password, navigate to the home screen
                 },

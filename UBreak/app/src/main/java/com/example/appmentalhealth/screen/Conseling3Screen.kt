@@ -1,5 +1,6 @@
 package com.example.appmentalhealth.screen
 
+import android.widget.CalendarView
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
@@ -20,16 +21,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
+import java.util.Calendar
+import java.util.Locale
 
 @Composable
 fun Conseling3Screen(
     navController: NavController
 ) {
+    var date by remember{
+        mutableStateOf("")
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -62,161 +69,32 @@ fun Conseling3Screen(
                 .fillMaxWidth()
                 .padding(20.dp)
         )
+        Column(
 
-        Image(
-            painter = painterResource(id = R.drawable.desktopdatepicker),
-            contentDescription = null,
-            Modifier
-                .padding(10.dp)
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            contentScale = ContentScale.Crop
-        )
-
-        Text(
-            text = "Tuesday, November 17",
-            fontFamily = alegreyaFamily,
-            fontWeight = FontWeight.Bold,
-            fontSize = 25.sp,
-            textAlign = TextAlign.Center,
+            verticalArrangement = Arrangement.Center,
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp)
-        )
-
-        Spacer(
-            modifier = Modifier
-                .padding(5.dp)
-        )
-
-        Row(
-            modifier = Modifier
-                .padding(0.dp)
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(color = White),
-            horizontalArrangement = Arrangement.Center,
-        ) {
-            Box(modifier = Modifier
-                .clickable {
-
-                })
-            {
-                Image(
-                    modifier = Modifier
-                        .width(73.dp)
-                        .height(25.dp),
-                    painter = painterResource(id = R.drawable.jam15),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-            Spacer(
-                modifier = Modifier
-                    .padding(20.dp)
-            )
-
-            Box(modifier = Modifier
-                .clickable {
-
-                })
-            {
-                Image(
-                    modifier = Modifier
-                        .width(73.dp)
-                        .height(25.dp),
-                    painter = painterResource(id = R.drawable.jam315),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-            Spacer(
-                modifier = Modifier
-                    .padding(20.dp)
-            )
-
-            Box(modifier = Modifier
-                .clickable {
-
-                })
-            {
-                Image(
-                    modifier = Modifier
-                        .width(73.dp)
-                        .height(25.dp),
-                    painter = painterResource(id = R.drawable.jam515),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-        }
-
-        Text(
-            text = "Choose a Method",
-            fontFamily = alegreyaFamily,
-            fontWeight = FontWeight.Bold,
-            fontSize = 25.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp)
-        )
-
-        Spacer(
-            modifier = Modifier
-                .padding(5.dp)
-        )
-
-        Row(
-            modifier = Modifier
-                .padding(0.dp)
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(color = White),
-            horizontalArrangement = Arrangement.Center,
-        ) {
-            Box(modifier = Modifier
-                .clickable {
-
-                })
-            {
-                Image(
-                    modifier = Modifier
-                        .width(73.dp)
-                        .height(25.dp),
-                    painter = painterResource(id = R.drawable.online),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
-
-            Spacer(
-                modifier = Modifier
-                    .padding(20.dp)
-            )
-
-            Box(modifier = Modifier
-                .clickable {
-
-                })
-            {
-                Image(
-                    modifier = Modifier
-                        .width(73.dp)
-                        .height(25.dp),
-                    painter = painterResource(id = R.drawable.offline),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.None
-                )
-            }
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ){
+            AndroidView(factory = { CalendarView(it) }, update = {
+                it.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+                    val calendar = Calendar.getInstance()
+                    calendar.set(year, month, dayOfMonth)
+                    val dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+                    date = "$dayOfWeek - $dayOfMonth/${month + 1}/$year"
+                }
+            })
+            Text(text = date,
+                modifier = Modifier,
+                fontSize = 18.sp,
+                fontFamily = alegreyaFamily,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Center)
         }
 
         Spacer(
             modifier = Modifier
-                .padding(20.dp)
+                .padding(45.dp)
         )
 
         Column(

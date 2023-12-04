@@ -62,18 +62,19 @@ fun AssasmentScreen(
 
             // Deskripsi
             Text(
-                text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla faucibus a nulla id maximus. Morbi aliquet, quam a imperdiet pretium, dolor ex commodo lectus, nec sagittis elit sem vel leo. Pellentesque in tortor condimentum, placerat lorem non, viverra neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. Duis convallis placerat nibh, eu viverra nisi sollicitudin posuere. Fusce sed mollis lacus, at auctor turpis. Integer rhoncus pretium sem eget rutrum. Fusce dignissim turpis tellus, eget facilisis sapien elementum nec.",
-                textAlign = TextAlign.Center,
+                text = "Please take the time to complete a self-assessment now. Self-assessment is a personal reflection process that can help you gain a better understanding of yourself, review achievements, identify areas for development, and evaluate feelings and life goals. By filling out a self-assessment now, you give yourself the opportunity to contemplate deeply on various aspects of your personal life, including physical, mental, and emotional well-being. This process can serve as a valuable foundation for personal planning and self-development, enabling you to take steps toward positive growth and achieving better goals.",
+                textAlign = TextAlign.Justify,
                 fontFamily = alegreyaFamily,
                 fontWeight = FontWeight.Thin,
                 fontSize = 16.sp,
-                modifier = Modifier.padding(top = 20.dp, bottom = 200.dp)
+                modifier = Modifier.padding(top = 20.dp, bottom = 200.dp, start = 10.dp, end = 10.dp)
 
             )
 
             Column(modifier = Modifier
                 .width(250.dp)
                 .height(40.dp)
+                .offset(y=(-20).dp)
                 .clip(RoundedCornerShape(50.dp)),
                 )
             {
