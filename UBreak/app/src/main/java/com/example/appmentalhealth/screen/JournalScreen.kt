@@ -6,7 +6,9 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,7 +28,10 @@ import java.util.Calendar
 fun JournalScreen( navController: NavController, date: String) {
     val calendar = Calendar.getInstance().time
     val dateFormat = DateFormat.getDateInstance().format(calendar)
+    var title by remember { mutableStateOf("") }
     var text by remember { mutableStateOf("") }
+    var isFocused by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -48,42 +53,61 @@ fun JournalScreen( navController: NavController, date: String) {
             contentScale = ContentScale.Crop
         )
 
-        // Welcome User
-        Text(
-            text = "Write your feelings here...",
-            fontFamily = alegreyaFamily,
-            fontWeight = FontWeight.Bold,
-            fontSize = 29.sp,
-            textAlign = TextAlign.Left,
-            modifier = Modifier.padding(30.dp)
-        )
-        Text(text = "Date: $dateFormat")
-        
-        Spacer(
+
+        Box(
             modifier = Modifier
-                .padding(20.dp))
-        Column(
-            modifier = Modifier
-                .width(307.dp)
-                .height(62.dp)
-                .clip(RoundedCornerShape(25.dp)),
-            horizontalAlignment = Alignment.CenterHorizontally,
+                .height(60.dp)
+                .background(color = Color.White)
+                .width(320.dp)
         ) {
-            Text(
-                text = "I hope something was you make smile today.",
+
+            // Journal Title
+            if (title.isEmpty() && !isFocused) {
+                Text(
+                    text = "Write Your Feelings Here...",
+                    fontFamily = alegreyaFamily,
+                    fontWeight = FontWeight.Thin,
+                    fontSize = 22.sp,
+                    color = Green3,
+                    modifier = Modifier.padding(10.dp)
+                )
+            }
+
+            TextField(
+                value = title,
+                onValueChange = {
+                    title = it
+                },
+                textStyle = LocalTextStyle.current.copy(
+                    fontFamily = alegreyaFamily,
+                    fontWeight = FontWeight.Thin,
+                    fontSize = 22.sp,
+                    color = Green3
+                ),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedLabelColor = White,
+                    unfocusedLabelColor = White,
+                    focusedBorderColor = White,
+                    unfocusedBorderColor = White,
+                    cursorColor = Green3,
+                    leadingIconColor = Green3,
+                    trailingIconColor = White,
+                ),
                 modifier = Modifier
-                    .width(307.dp)
-                    .height(62.dp)
-                    .background(color = Green6),
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center,
-                fontFamily = alegreyaFamily,
-                fontSize = 20.sp,
+                    .fillMaxSize()
             )
         }
-        Spacer(
+
+        Text(text = "$dateFormat",
             modifier = Modifier
-                .padding(20.dp))
+                .width(300.dp)
+                .padding(top = 2.dp, bottom = 20.dp),
+            fontFamily = alegreyaFamily,
+            fontWeight = FontWeight.Thin,
+            fontSize = 16.sp,
+            color = Green3
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -93,83 +117,109 @@ fun JournalScreen( navController: NavController, date: String) {
 
 
         ) {
-            TextField(
-                label = { Text("Start typing...") },
-                value = text,
-                onValueChange = { text = it },
+            Box(
                 modifier = Modifier
-                    .height(200.dp)
-                    .background(color = Green6)
-                    .fillMaxWidth(),
-            )
+                    .height(450.dp)
+                    .background(color = Green8)
+                    .width(320.dp)
+            ) {
+
+                // Journal Content
+                if (text.isEmpty() && !isFocused) {
+                    Text(
+                        text = "Write your thoughts here...",
+                        fontFamily = alegreyaFamily,
+                        fontWeight = FontWeight.Thin,
+                        fontSize = 18.sp,
+                        color = Green3,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+
+                TextField(
+                    value = text,
+                    onValueChange = {
+                        text = it
+                    },
+                    textStyle = LocalTextStyle.current.copy(
+                        fontFamily = alegreyaFamily,
+                        fontWeight = FontWeight.Thin,
+                        fontSize = 18.sp,
+                        color = Green2
+                    ),
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedLabelColor = White,
+                        unfocusedLabelColor = White,
+                        focusedBorderColor = White,
+                        unfocusedBorderColor = White,
+                        cursorColor = Green3,
+                        leadingIconColor = Green3,
+                        trailingIconColor = White,
+                    ),
+                    modifier = Modifier
+                        .fillMaxSize()
+                )
+            }
+
         }
 
-        Column(
+
+        Spacer(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp ,end = 30.dp)
-                .height(40.dp),
-            horizontalAlignment = Alignment.End,
-        ) {
-            Button(
-                onClick = {
-                    navController.navigate(route = Screen.Main.route)
-                    // Add your sign-in logic here
-                    // Example: Check email and password, navigate to the home screen
-                },
+                .padding(10.dp))
+
+
+
+        Spacer(
+            modifier = Modifier
+                .padding(20.dp))
+
+        JournalBottomBar(
+            items = listOf(
+                BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_edit),
+                BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_kamera),
+                BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_mic),
+                BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_fixed)
+            ),
+            navController = navController
+        )
+
+    }
+}
+
+@Composable
+fun JournalBottomBar(
+    items: List<BottomNavItem>,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
+
+    Row(
+        modifier = modifier
+            .width(320.dp)
+            .padding(bottom = 30.dp)
+            .clip(RoundedCornerShape(25.dp)),
+        verticalAlignment = Alignment.Bottom
+    ) {
+        items.forEach { item ->
+            Box(
                 modifier = Modifier
-                    .width(100.dp)
-                    .padding(end = 10.dp)
-                    .clip(RoundedCornerShape(25.dp))
-                    .fillMaxHeight(),
-                colors = ButtonDefaults.buttonColors(Green4)
+                    .height(80.dp)
+                    .background(Green4)
+                    .clickable {
+                        navController.navigate(route = item.route)
+                    }
             ) {
-                Text(text = "Post",
-                    textAlign = TextAlign.Center,
-                    fontFamily = alegreyaFamily,
-                    fontWeight = FontWeight.Thin,
-                    fontSize = 20.sp,
-                    color = White,
+                Image(
+                    modifier = Modifier
+                        .width(80.dp)
+                        .height(80.dp),
+                    painter = painterResource(id = item.iconResId),
+                    contentDescription = "image description",
+                    contentScale = ContentScale.None
                 )
             }
         }
-
-        Spacer(
-            modifier = Modifier
-                .padding(20.dp))
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-                .clip(RoundedCornerShape(25.dp)),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(
-                onClick = {
-                    navController.navigate(route = Screen.JournalHistory.route)
-                    // Add your sign-in logic here
-                    // Example: Check email and password, navigate to the home screen
-                },
-                modifier = Modifier
-                    .width(150.dp)
-                    .clip(RoundedCornerShape(25.dp))
-                    .fillMaxHeight(),
-                colors = ButtonDefaults.buttonColors(Green4)
-            ) {
-                Text(text = "History",
-                    fontFamily = alegreyaFamily,
-                    fontWeight = FontWeight.Thin,
-                    fontSize = 20.sp,
-                    color = White,)
-
-            }
-        }
-
-        Spacer(
-            modifier = Modifier
-                .padding(20.dp))
-
     }
 }
 
