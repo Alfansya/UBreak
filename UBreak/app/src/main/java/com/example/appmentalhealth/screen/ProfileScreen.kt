@@ -240,7 +240,7 @@ fun ProfileScreen(
         )
             Box(
                 Modifier
-                    .padding(20.dp)
+                    .padding(top = 20.dp, start = 20.dp, end = 20.dp)
                     .width(380.dp)
                     .clickable { navController.navigate(route = Screen.ProfileEdit.route) }
             )
@@ -303,10 +303,6 @@ fun ProfileScreen(
                     }
                 }
             }
-        Spacer(
-            modifier = Modifier
-                .padding(10.dp)
-        )
     }
 
     // Bottom Navigation Bar
