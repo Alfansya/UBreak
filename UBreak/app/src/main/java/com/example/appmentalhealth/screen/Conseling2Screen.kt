@@ -36,7 +36,7 @@ fun Conseling2Screen(
     navController: NavController
 ) {
     val counselor = listOf(
-        Counselor(icon = R.drawable.image8, title = "Dr. Imran Syahir", desc = "Psychologists") {
+        Counselor(icon = R.drawable.group6, title = "Dr. Imran Syahir", desc = "Psychologists") {
             navController.navigate(route = Screen.Conseling3.route)
         }
     )

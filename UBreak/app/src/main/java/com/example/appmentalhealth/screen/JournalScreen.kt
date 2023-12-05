@@ -1,4 +1,5 @@
 package com.example.appmentalhealth.screen
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -6,13 +7,11 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -21,17 +20,37 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.DateFormat
 import java.util.Calendar
 
 @Composable
-fun JournalScreen( navController: NavController, date: String) {
+fun JournalScreen(navController: NavController, date: String) {
     val calendar = Calendar.getInstance().time
     val dateFormat = DateFormat.getDateInstance().format(calendar)
     var title by remember { mutableStateOf("") }
     var text by remember { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
 
+    val db = FirebaseFirestore.getInstance() // Firebase Firestore Instance
+
+    // Fungsi untuk menyimpan data ke Firestore
+    fun saveJournalToFirestore(title: String, date: String, text: String) {
+        val journalEntry = hashMapOf(
+            "title" to title,
+            "date" to date,
+            "text" to text
+        )
+
+        db.collection("journals")
+            .add(journalEntry)
+            .addOnSuccessListener { documentReference ->
+                Log.d("JournalScreen", "DocumentSnapshot written with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w("JournalScreen", "Error adding document", e)
+            }
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -40,8 +59,10 @@ fun JournalScreen( navController: NavController, date: String) {
             .background(color = White),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier
-            .padding(20.dp))
+        Spacer(
+            modifier = Modifier
+                .padding(20.dp)
+        )
         // Gambar
         Image(
             painter = painterResource(id = R.drawable.iconmenu),
@@ -98,7 +119,8 @@ fun JournalScreen( navController: NavController, date: String) {
             )
         }
 
-        Text(text = "$dateFormat",
+        Text(
+            text = "$dateFormat",
             modifier = Modifier
                 .width(300.dp)
                 .padding(top = 2.dp, bottom = 20.dp),
@@ -166,7 +188,8 @@ fun JournalScreen( navController: NavController, date: String) {
 
         Spacer(
             modifier = Modifier
-                .padding(10.dp))
+                .padding(10.dp)
+        )
 
 
 
@@ -176,12 +199,15 @@ fun JournalScreen( navController: NavController, date: String) {
 
         JournalBottomBar(
             items = listOf(
-                BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_edit),
+                BottomNavItem(route = Screen.Main.route, iconResId = R.drawable.jurnal_edit),
                 BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_kamera),
                 BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_mic),
-                BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_fixed)
+                BottomNavItem(route = Screen.Journalconfirmation.route, iconResId = R.drawable.jurnal_fixed)
             ),
-            navController = navController
+            navController = navController,
+            onSaveClick = {
+                saveJournalToFirestore(title, dateFormat, text) // Pass the save function
+            }
         )
 
     }
@@ -191,9 +217,9 @@ fun JournalScreen( navController: NavController, date: String) {
 fun JournalBottomBar(
     items: List<BottomNavItem>,
     navController: NavController,
+    onSaveClick: () -> Unit, // New parameter for save action
     modifier: Modifier = Modifier
 ) {
-
     Row(
         modifier = modifier
             .width(320.dp)
@@ -201,13 +227,18 @@ fun JournalBottomBar(
             .clip(RoundedCornerShape(25.dp)),
         verticalAlignment = Alignment.Bottom
     ) {
-        items.forEach { item ->
+        items.forEachIndexed { index, item ->
             Box(
                 modifier = Modifier
                     .height(80.dp)
                     .background(Green4)
                     .clickable {
-                        navController.navigate(route = item.route)
+                        if (index == 3) { // Assuming the first button is save
+                            onSaveClick() // Call the save action
+                            navController.navigate(route = item.route)
+                        } else {
+                            navController.navigate(route = item.route)
+                        }
                     }
             ) {
                 Image(

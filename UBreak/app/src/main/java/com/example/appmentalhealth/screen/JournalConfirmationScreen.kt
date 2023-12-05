@@ -23,6 +23,8 @@ import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
 import java.text.DateFormat
 import java.util.Calendar
+import com.example.appmentalhealth.screen.JournalScreen
+
 
 @Composable
 fun JournalConfirmationScreen( navController: NavController, date: String) {
@@ -31,6 +33,7 @@ fun JournalConfirmationScreen( navController: NavController, date: String) {
     var title by remember { mutableStateOf("") }
     var text by remember { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
+
 
     Column(
         modifier = Modifier
@@ -91,8 +94,7 @@ fun JournalConfirmationScreen( navController: NavController, date: String) {
                 .padding(50.dp))
 
         Button(
-            onClick = {
-                 },
+            onClick = { navController.navigate(route = Screen.JournalHistory.route) },
             modifier = Modifier
                 .width(320.dp)
                 .height(60.dp)
@@ -114,7 +116,7 @@ fun JournalConfirmationScreen( navController: NavController, date: String) {
                 .padding(10.dp))
 
         Button(
-            onClick = {
+            onClick = { navController.navigate(route = Screen.Journal.route)
             },
             modifier = Modifier
                 .width(320.dp)

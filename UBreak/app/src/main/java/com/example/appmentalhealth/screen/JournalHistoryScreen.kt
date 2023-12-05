@@ -1,7 +1,6 @@
 package com.example.appmentalhealth.screen
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -78,8 +77,8 @@ fun JournalHistoryScreen( navController: NavController) {
                             .width(180.dp)
                             .height(240.dp)
                             .padding(10.dp)
-                            .shadow(elevation = 5.dp, shape = RoundedCornerShape(10.dp), clip = true),
-                    ) {
+                            .clickable { navController.navigate(route = Screen.JournalView.route)}
+                            .shadow(elevation = 5.dp, shape = RoundedCornerShape(10.dp), clip = true)) {
                         Column {
                             Image(
                                 painter = painterResource(id = R.drawable.album_cover),
@@ -122,9 +121,18 @@ fun JournalHistoryScreen( navController: NavController) {
     BottomBarRow(
         items = listOf(
             BottomNavItem(route = Screen.Main.route, iconResId = R.drawable.home_new),
-            BottomNavItem(route = Screen.Conseling.route, iconResId = R.drawable.konsel_new),
-            BottomNavItem(route = Screen.JournalHistory.route, iconResId = R.drawable.jurnal_new),
-            BottomNavItem(route = Screen.Profile.route, iconResId = R.drawable.profile_new)
+            BottomNavItem(
+                route = Screen.Conseling.route,
+                iconResId = R.drawable.konsel_new,
+            ),
+            BottomNavItem(
+                route = Screen.JournalHistory.route,
+                iconResId = R.drawable.jurnal_new,
+            ),
+            BottomNavItem(
+                route = Screen.Profile.route,
+                iconResId = R.drawable.profile_new,
+            )
         ),
         navController = navController,
         modifier = Modifier
