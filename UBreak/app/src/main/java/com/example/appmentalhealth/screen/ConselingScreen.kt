@@ -108,7 +108,6 @@ fun ConselingScreen(
         {
             Button(
                 onClick = {
-                    navController.navigate(route = Screen.Conseling4.route)
                     // Add your sign-in logic here
                     // Example: Check email and password, navigate to the home screen
                 },
