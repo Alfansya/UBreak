@@ -14,6 +14,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,9 +36,9 @@ import java.util.Locale
 fun Conseling3Screen(
     navController: NavController
 ) {
-    var date by remember{
-        mutableStateOf("")
+    var date by remember{ mutableStateOf("")
     }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -76,14 +78,34 @@ fun Conseling3Screen(
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ){
-            AndroidView(factory = { CalendarView(it) }, update = {
-                it.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
-                    val calendar = Calendar.getInstance()
-                    calendar.set(year, month, dayOfMonth)
-                    val dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
-                    date = "$dayOfWeek - $dayOfMonth/${month + 1}/$year"
+            AndroidView(factory = { context ->
+                CalendarView(context).apply {
+                    // Mendapatkan tanggal hari ini
+                    val today = Calendar.getInstance()
+
+                    // Menetapkan batas minimal untuk memilih tanggal
+                    minDate = today.timeInMillis
+
+                    // Menangani perubahan tanggal yang dipilih
+                    setOnDateChangeListener { _, year, month, dayOfMonth ->
+                        val selectedDate = Calendar.getInstance()
+                        selectedDate.set(year, month, dayOfMonth)
+
+                        // Memeriksa apakah tanggal yang dipilih sesuai dengan batas minimal
+                        if (!selectedDate.before(today)) {
+                            // Jika sesuai, update teks dengan tanggal yang dipilih
+                            val dayOfWeek = selectedDate.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+                            date = "$dayOfWeek - $dayOfMonth/${month + 1}/$year"
+                        } else {
+                            // Jika tidak sesuai, set tanggal yang dipilih ke tanggal minimal (hari ini)
+                            date = "${today.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())} - " +
+                                    "${today.get(Calendar.DAY_OF_MONTH)}/${today.get(Calendar.MONTH) + 1}/${today.get(Calendar.YEAR)}"
+                            setDate(today.timeInMillis)
+                        }
+                    }
                 }
-            })
+            }, update = {})
+
             Text(text = date,
                 modifier = Modifier,
                 fontSize = 18.sp,
@@ -91,10 +113,136 @@ fun Conseling3Screen(
                 fontWeight = FontWeight.SemiBold,
                 textAlign = TextAlign.Center)
         }
+        Spacer(modifier = Modifier.padding(5.dp))
+        Row(
+            modifier = Modifier
+                .padding(10.dp)
+                .width(350.dp)
+        ){
+            Button(onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .padding(start = 10.dp)
+                    .width(100.dp)
+                    .height(30.dp)
+                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
+                    .clip(shape = RoundedCornerShape(50.dp)),
 
+                colors = ButtonDefaults.buttonColors(White)
+                ) {
+                Text(
+                    text = "12.00",
+                    modifier = Modifier,
+                    fontSize = 12.sp,
+                    fontFamily = alegreyaFamily,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center,
+                    color = Green4,
+                )
+            }
+            Button(onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .padding(start = 10.dp)
+                    .width(100.dp)
+                    .height(30.dp)
+                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
+                    .clip(shape = RoundedCornerShape(50.dp)),
+
+                colors = ButtonDefaults.buttonColors(White)
+            ) {
+                Text(
+                    text = "13.00",
+                    modifier = Modifier,
+                    fontSize = 12.sp,
+                    fontFamily = alegreyaFamily,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center,
+                    color = Green4,
+                )
+            }
+            Button(onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .padding(start = 10.dp)
+                    .width(100.dp)
+                    .height(30.dp)
+                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
+                    .clip(shape = RoundedCornerShape(50.dp)),
+
+                colors = ButtonDefaults.buttonColors(White)
+            ) {
+                Text(
+                    text = "14.00",
+                    modifier = Modifier,
+                    fontSize = 12.sp,
+                    fontFamily = alegreyaFamily,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center,
+                    color = Green4,
+                )
+            }
+
+        }
+        Spacer(modifier = Modifier.padding(5.dp))
+        Text(
+            text = "Choose a Method",
+            modifier = Modifier,
+            fontSize = 18.sp,
+            fontFamily = alegreyaFamily,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center,
+            color = Color.Black,
+        )
+        Row(
+            modifier = Modifier
+                .padding(10.dp)
+                .width(350.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Button(onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .padding(start = 10.dp, top = 5.dp)
+                    .width(100.dp)
+                    .height(30.dp)
+                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
+                    .clip(shape = RoundedCornerShape(50.dp)),
+
+                colors = ButtonDefaults.buttonColors(White)
+            ) {
+                Text(
+                    text = "Offline",
+                    modifier = Modifier,
+                    fontSize = 12.sp,
+                    fontFamily = alegreyaFamily,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center,
+                    color = Green4,
+                )
+            }
+            Button(onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .padding(start = 10.dp, top = 5.dp)
+                    .width(100.dp)
+                    .height(30.dp)
+                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
+                    .clip(shape = RoundedCornerShape(50.dp)),
+
+                colors = ButtonDefaults.buttonColors(White)
+            ) {
+                Text(
+                    text = "Online",
+                    modifier = Modifier,
+                    fontSize = 12.sp,
+                    fontFamily = alegreyaFamily,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center,
+                    color = Green4,
+                )
+            }
+
+        }
         Spacer(
             modifier = Modifier
-                .padding(45.dp)
+                .padding(20.dp)
         )
 
         Column(
@@ -106,11 +254,12 @@ fun Conseling3Screen(
         {
             Button(
                 onClick = {
-                    navController.navigate(route = Screen.Conseling4.route)
+                    navController.navigate(route = Screen.Main.route)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(),
+                    .fillMaxHeight()
+                    .shadow(elevation = 10.dp, shape = RoundedCornerShape(10.dp), clip = true),
                 colors = ButtonDefaults.buttonColors(Green4),
             ) {
                 Row(

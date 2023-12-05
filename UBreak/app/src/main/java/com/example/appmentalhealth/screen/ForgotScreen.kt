@@ -84,7 +84,7 @@ fun ForgotScreen(
             value = email,
             onValueChange = { email = it },
             label = { Text("Email") },
-            modifier = Modifier.width(250.dp),
+            modifier = Modifier.width(350.dp),
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() })
         )
@@ -108,7 +108,7 @@ fun ForgotScreen(
                 }
             },
             modifier = Modifier
-                .width(250.dp)
+                .width(350.dp)
                 .height(48.dp)
                 .clip(RoundedCornerShape(8.dp)),
             colors = ButtonDefaults.buttonColors(backgroundColor = Green4)
