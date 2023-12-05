@@ -1,5 +1,6 @@
 package com.example.appmentalhealth
 
+
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
@@ -65,6 +66,16 @@ fun SetupNavGraph(
             route = Screen.Journal.route
         ){
             JournalScreen(navController, date = String())
+        }
+        composable(
+            route = Screen.JournalView.route
+        ){
+            JournalViewScreen(navController, date = String() )
+        }
+        composable(
+            route = Screen.Journalconfirmation.route
+        ){
+            JournalConfirmationScreen(navController, date = String() )
         }
         composable(
             route = Screen.JournalHistory.route

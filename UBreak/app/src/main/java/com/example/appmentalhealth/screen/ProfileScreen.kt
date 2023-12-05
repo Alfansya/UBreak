@@ -309,9 +309,18 @@ fun ProfileScreen(
     BottomBarRow(
         items = listOf(
             BottomNavItem(route = Screen.Main.route, iconResId = R.drawable.home_new),
-            BottomNavItem(route = Screen.Conseling.route, iconResId = R.drawable.konsel_new),
-            BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_new),
-            BottomNavItem(route = Screen.Profile.route, iconResId = R.drawable.profile_new)
+            BottomNavItem(
+                route = Screen.Conseling.route,
+                iconResId = R.drawable.konsel_new,
+            ),
+            BottomNavItem(
+                route = Screen.Journal.route,
+                iconResId = R.drawable.jurnal_new,
+            ),
+            BottomNavItem(
+                route = Screen.Profile.route,
+                iconResId = R.drawable.profile_new,
+            )
         ),
         navController = navController
     )
