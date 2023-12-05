@@ -37,6 +37,16 @@ fun ConselingScreen(
             .background(color = White),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Image(
+            modifier = Modifier
+                .width(50.dp)
+                .padding(end = 20.dp, top = 20.dp)
+                .offset(x = (-150).dp)
+                .clickable { navController.navigate(route = Screen.Main.route) },
+            painter = painterResource(id = R.drawable.back),
+            contentDescription = "image description",
+            contentScale = ContentScale.Crop
+        )
         // Gambar
         Image(
             painter = painterResource(id = R.drawable.interviewpana1),

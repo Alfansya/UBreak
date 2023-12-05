@@ -37,13 +37,23 @@ fun AssasmentScreen(
             .background(color = White),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Image(
+            modifier = Modifier
+                .width(50.dp)
+                .padding(end = 20.dp, top = 20.dp)
+                .offset(x = (-150).dp)
+                .clickable { navController.navigate(route = Screen.Main.route) },
+            painter = painterResource(id = R.drawable.back),
+            contentDescription = "image description",
+            contentScale = ContentScale.Crop
+        )
         // Gambar
         Image(
             painter = painterResource(id = R.drawable.assasmenticon),
             alignment = Alignment.Center,
             contentDescription = null,
             modifier = Modifier
-                .padding(top = 100.dp)
+                .padding(top = 70.dp)
                 .width(118.dp)
                 .height(118.dp)
                 .background(color = White)
@@ -74,7 +84,7 @@ fun AssasmentScreen(
             Column(modifier = Modifier
                 .width(250.dp)
                 .height(40.dp)
-                .offset(y=(-20).dp)
+                .offset(y = (-20).dp)
                 .clip(RoundedCornerShape(50.dp)),
                 )
             {
