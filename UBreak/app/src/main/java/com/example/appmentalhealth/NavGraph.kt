@@ -70,7 +70,7 @@ fun SetupNavGraph(
         composable(
             route = Screen.JournalView.route
         ){
-            JournalViewScreen(navController, date = String() )
+            JournalViewScreen(navController, userId = String())
         }
         composable(
             route = Screen.Journalconfirmation.route

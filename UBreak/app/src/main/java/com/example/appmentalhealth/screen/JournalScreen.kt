@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.DateFormat
 import java.util.Calendar
@@ -31,12 +32,14 @@ fun JournalScreen(navController: NavController, date: String) {
     var title by remember { mutableStateOf("") }
     var text by remember { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
+    val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
     val db = FirebaseFirestore.getInstance() // Firebase Firestore Instance
 
     // Fungsi untuk menyimpan data ke Firestore
-    fun saveJournalToFirestore(title: String, date: String, text: String) {
+    fun saveJournalToFirestore(userId: String, title: String, date: String, text: String) {
         val journalEntry = hashMapOf(
+            "userId" to userId, // Add the userId to the journal entry
             "title" to title,
             "date" to date,
             "text" to text
@@ -206,7 +209,7 @@ fun JournalScreen(navController: NavController, date: String) {
             ),
             navController = navController,
             onSaveClick = {
-                saveJournalToFirestore(title, dateFormat, text) // Pass the save function
+                saveJournalToFirestore(userId, title, dateFormat, text) // Pass the save function
             }
         )
 

@@ -1,4 +1,5 @@
 package com.example.appmentalhealth.screen
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,16 +22,41 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.DateFormat
 import java.util.Calendar
+data class Journal(
+    val title: String = "",
+    val text: String = "",
+    val date: String = ""
+)
+
+fun fetchJournals(userId: String, onResult: (List<Journal>) -> Unit) {
+    FirebaseFirestore.getInstance()
+        .collection("journals")
+        .get()
+        .addOnSuccessListener { documents ->
+            Log.d("JournalViewScreen", "Documents fetched successfully")
+            val journals = documents.mapNotNull { it.toObject(Journal::class.java) }
+            onResult(journals)
+        }
+        .addOnFailureListener { exception ->
+            Log.w("JournalViewScreen", "Error getting documents: ", exception)
+        }
+}
 
 @Composable
-fun JournalViewScreen( navController: NavController, date: String) {
-    val calendar = Calendar.getInstance().time
-    val dateFormat = DateFormat.getDateInstance().format(calendar)
-    var title by remember { mutableStateOf("") }
-    var text by remember { mutableStateOf("") }
-    var isFocused by remember { mutableStateOf(false) }
+fun JournalViewScreen(navController: NavController, userId: String) {
+    val journals = remember { mutableStateListOf<Journal>() }
+    var currentJournalIndex by remember { mutableStateOf(0) }
+
+    LaunchedEffect(key1 = Unit) {
+        fetchJournals(userId) { fetchedJournals ->
+            journals.addAll(fetchedJournals)
+        }
+    }
+
+    val currentJournal = journals.getOrNull(currentJournalIndex)
 
     Column(
         modifier = Modifier
@@ -92,12 +118,7 @@ fun JournalViewScreen( navController: NavController, date: String) {
             ) {
                 // Journal Content
                     Text(
-                        text = "Lorem ipsum dolor sit amet, " +
-                                "consectetur adipiscing elit. " +
-                                "Praesent blandit urna eget congue dapibus. " +
-                                "Curabitur luctus augue sed sem iaculis euismod. " +
-                                "Nullam volutpat augue tincidunt nisl viverra, quis mollis velit consectetur. " +
-                                "Cras nec massa quis quam suscipit pretium a vitae lectus.",
+                        text = currentJournal?.text ?: "Loading...",
                         fontFamily = alegreyaFamily,
                         fontWeight = FontWeight.Thin,
                         fontSize = 18.sp,
@@ -110,7 +131,7 @@ fun JournalViewScreen( navController: NavController, date: String) {
                     )
 
                 Text(
-                    text = "$dateFormat",
+                    text = currentJournal?.date ?: "",
                     fontFamily = alegreyaFamily,
                     fontWeight = FontWeight.Thin,
                     fontSize = 18.sp,
@@ -129,7 +150,7 @@ fun JournalViewScreen( navController: NavController, date: String) {
 
                 ){
                     Text(
-                        text = "Journal Title",
+                        text = currentJournal?.title ?: "",
                         fontFamily = alegreyaFamily,
                         fontWeight = FontWeight.Thin,
                         fontSize = 18.sp,
@@ -139,27 +160,27 @@ fun JournalViewScreen( navController: NavController, date: String) {
                             .padding(start = 10.dp, end = 16.dp)
                             .wrapContentWidth()
                     )
-                    Text(
-                        text = "1 of 7",
-                        fontFamily = alegreyaFamily,
-                        fontWeight = FontWeight.Thin,
-                        fontSize = 18.sp,
-                        color = Green3,
-                        textAlign = TextAlign.Justify,
-                        modifier = Modifier
-                            .padding(start = 10.dp, end = 16.dp)
-                            .wrapContentWidth()
-                    )
+//                    Text(
+//                        text = "1 of 7",
+//                        fontFamily = alegreyaFamily,
+//                        fontWeight = FontWeight.Thin,
+//                        fontSize = 18.sp,
+//                        color = Green3,
+//                        textAlign = TextAlign.Justify,
+//                        modifier = Modifier
+//                            .padding(start = 10.dp, end = 16.dp)
+//                            .wrapContentWidth()
+//                    )
                 }
 
 
-                Image(
-                    painter = painterResource(id = R.drawable.jurnal_preview),
-                    contentDescription = null,
-                    Modifier
-                        .padding(10.dp)
-                        .fillMaxWidth()
-                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.jurnal_preview),
+//                    contentDescription = null,
+//                    Modifier
+//                        .padding(10.dp)
+//                        .fillMaxWidth()
+//                )
 
                 }
             }
