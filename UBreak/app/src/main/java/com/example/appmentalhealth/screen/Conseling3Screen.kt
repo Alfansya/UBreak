@@ -38,6 +38,8 @@ fun Conseling3Screen(
 ) {
     var date by remember{ mutableStateOf("")
     }
+    var selectedTimeIndex by remember { mutableStateOf(-1) }
+    var selectedMethodIndex by remember { mutableStateOf(-1) }
 
     Column(
         modifier = Modifier
@@ -114,73 +116,29 @@ fun Conseling3Screen(
                 textAlign = TextAlign.Center)
         }
         Spacer(modifier = Modifier.padding(5.dp))
+
         Row(
             modifier = Modifier
                 .padding(10.dp)
                 .width(350.dp)
-        ){
-            Button(onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .padding(start = 10.dp)
-                    .width(100.dp)
-                    .height(30.dp)
-                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
-                    .clip(shape = RoundedCornerShape(50.dp)),
-
-                colors = ButtonDefaults.buttonColors(White)
-                ) {
-                Text(
-                    text = "12.00",
-                    modifier = Modifier,
-                    fontSize = 12.sp,
-                    fontFamily = alegreyaFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center,
-                    color = Green4,
-                )
-            }
-            Button(onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .padding(start = 10.dp)
-                    .width(100.dp)
-                    .height(30.dp)
-                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
-                    .clip(shape = RoundedCornerShape(50.dp)),
-
-                colors = ButtonDefaults.buttonColors(White)
-            ) {
-                Text(
-                    text = "13.00",
-                    modifier = Modifier,
-                    fontSize = 12.sp,
-                    fontFamily = alegreyaFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center,
-                    color = Green4,
-                )
-            }
-            Button(onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .padding(start = 10.dp)
-                    .width(100.dp)
-                    .height(30.dp)
-                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
-                    .clip(shape = RoundedCornerShape(50.dp)),
-
-                colors = ButtonDefaults.buttonColors(White)
-            ) {
-                Text(
-                    text = "14.00",
-                    modifier = Modifier,
-                    fontSize = 12.sp,
-                    fontFamily = alegreyaFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center,
-                    color = Green4,
-                )
+        ) {
+            TimeButton("12.00", selectedTimeIndex, 0) {
+                selectedTimeIndex = 0
+                // TODO: Add your logic here
             }
 
+            TimeButton("13.00", selectedTimeIndex, 1) {
+                selectedTimeIndex = 1
+                // TODO: Add your logic here
+            }
+
+            TimeButton("14.00", selectedTimeIndex, 2) {
+                selectedTimeIndex = 2
+                // TODO: Add your logic here
+            }
         }
+
+
         Spacer(modifier = Modifier.padding(5.dp))
         Text(
             text = "Choose a Method",
@@ -191,55 +149,26 @@ fun Conseling3Screen(
             textAlign = TextAlign.Center,
             color = Color.Black,
         )
+
         Row(
             modifier = Modifier
                 .padding(10.dp)
                 .width(350.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
-        ){
-            Button(onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .padding(start = 10.dp, top = 5.dp)
-                    .width(100.dp)
-                    .height(30.dp)
-                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
-                    .clip(shape = RoundedCornerShape(50.dp)),
-
-                colors = ButtonDefaults.buttonColors(White)
-            ) {
-                Text(
-                    text = "Offline",
-                    modifier = Modifier,
-                    fontSize = 12.sp,
-                    fontFamily = alegreyaFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center,
-                    color = Green4,
-                )
-            }
-            Button(onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .padding(start = 10.dp, top = 5.dp)
-                    .width(100.dp)
-                    .height(30.dp)
-                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
-                    .clip(shape = RoundedCornerShape(50.dp)),
-
-                colors = ButtonDefaults.buttonColors(White)
-            ) {
-                Text(
-                    text = "Online",
-                    modifier = Modifier,
-                    fontSize = 12.sp,
-                    fontFamily = alegreyaFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center,
-                    color = Green4,
-                )
+        ) {
+            MethodButton("Offline", selectedMethodIndex, 0) {
+                selectedMethodIndex = 0
+                // TODO: Add your logic here
             }
 
+            MethodButton("Online", selectedMethodIndex, 1) {
+                selectedMethodIndex = 1
+                // TODO: Add your logic here
+            }
         }
+
+
         Spacer(
             modifier = Modifier
                 .padding(20.dp)
@@ -288,6 +217,74 @@ fun Conseling3Screen(
         )
     }
 }
+
+
+@Composable
+fun TimeButton(
+    text: String,
+    selectedIndex: Int,
+    buttonIndex: Int,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        modifier = Modifier
+            .padding(start = if (buttonIndex > 0) 10.dp else 0.dp)
+            .width(100.dp)
+            .height(30.dp)
+            .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
+            .clip(shape = RoundedCornerShape(50.dp)),
+        colors = if (selectedIndex == buttonIndex) {
+            ButtonDefaults.buttonColors(backgroundColor = Green4)
+        } else {
+            ButtonDefaults.buttonColors(backgroundColor = White)
+        }
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier,
+            fontSize = 12.sp,
+            fontFamily = alegreyaFamily,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center,
+            color = if (selectedIndex == buttonIndex) White else Green4,
+        )
+    }
+}
+
+@Composable
+fun MethodButton(
+    text: String,
+    selectedIndex: Int,
+    buttonIndex: Int,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        modifier = Modifier
+            .padding(start = 10.dp, top = 5.dp)
+            .width(100.dp)
+            .height(30.dp)
+            .shadow(elevation = 4.dp, shape = RoundedCornerShape(50.dp), clip = true)
+            .clip(shape = RoundedCornerShape(50.dp)),
+        colors = if (selectedIndex == buttonIndex) {
+            ButtonDefaults.buttonColors(backgroundColor = Green4)
+        } else {
+            ButtonDefaults.buttonColors(backgroundColor = White)
+        }
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier,
+            fontSize = 12.sp,
+            fontFamily = alegreyaFamily,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center,
+            color = if (selectedIndex == buttonIndex) White else Green4,
+        )
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
