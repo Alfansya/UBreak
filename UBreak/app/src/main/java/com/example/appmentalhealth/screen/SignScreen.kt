@@ -160,16 +160,16 @@ fun SignScreen(
             )
 
             Spacer(
-                modifier = Modifier.padding(50.dp)
+                modifier = Modifier.padding(60.dp)
             )
-            0      }
+        }
 
 
         // Grouped elements in a Column with white background
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)  // Take the full height of the screen
+                .height(120.dp)  // Take the full height of the screen
                 .background(Color.White)
                 .align(Alignment.BottomCenter),  // Align to the bottom center
             horizontalAlignment = Alignment.CenterHorizontally,
