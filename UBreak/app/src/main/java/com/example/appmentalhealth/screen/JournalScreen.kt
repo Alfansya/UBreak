@@ -205,7 +205,7 @@ fun JournalScreen(navController: NavController, date: String) {
                 BottomNavItem(route = Screen.Main.route, iconResId = R.drawable.jurnal_edit),
                 BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_kamera),
                 BottomNavItem(route = Screen.Journal.route, iconResId = R.drawable.jurnal_mic),
-                BottomNavItem(route = Screen.Journalconfirmation.route, iconResId = R.drawable.jurnal_fixed)
+                BottomNavItem(route = Screen.JournalConfirmation.route, iconResId = R.drawable.jurnal_fixed)
             ),
             navController = navController,
             onSaveClick = {

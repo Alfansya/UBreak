@@ -183,7 +183,7 @@ fun Conseling3Screen(
         {
             Button(
                 onClick = {
-                    navController.navigate(route = Screen.Main.route)
+                    navController.navigate(route = Screen.ConselingDialog.route)
                 },
                 modifier = Modifier
                     .fillMaxWidth()

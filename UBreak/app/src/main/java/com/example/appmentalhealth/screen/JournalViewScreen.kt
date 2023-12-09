@@ -7,7 +7,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -23,8 +22,6 @@ import com.example.appmentalhealth.R
 import com.example.appmentalhealth.Screen
 import com.example.appmentalhealth.ui.theme.*
 import com.google.firebase.firestore.FirebaseFirestore
-import java.text.DateFormat
-import java.util.Calendar
 data class Journal(
     val title: String = "",
     val text: String = "",
@@ -112,7 +109,7 @@ fun JournalViewScreen(navController: NavController, userId: String) {
         ) {
             Column(
                 modifier = Modifier
-                    .height(420.dp)
+                    .height(400.dp)
                     .background(color = Green8)
                     .width(320.dp)
             ) {
@@ -126,7 +123,7 @@ fun JournalViewScreen(navController: NavController, userId: String) {
                         textAlign = TextAlign.Justify,
                         modifier = Modifier
                             .padding(16.dp)
-                            .padding(bottom = 0.dp)
+                            .padding(bottom = 25.dp)
                             .fillMaxWidth()
                     )
 
@@ -214,6 +211,7 @@ fun JournalViewScreen(navController: NavController, userId: String) {
 
         Button(
             onClick = {
+                navController.navigate(route = Screen.JournalHistory.route)
             },
             modifier = Modifier
                 .width(320.dp)

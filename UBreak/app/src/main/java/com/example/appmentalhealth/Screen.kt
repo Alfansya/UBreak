@@ -9,7 +9,7 @@ sealed class Screen(val route: String){
     object Assasment2: Screen(route = "assasment2_screen")
     object Assasment3: Screen(route = "assasment3_screen")
     object Journal: Screen(route = "journal_screen")
-    object Journalconfirmation: Screen(route = "journal_confirmation")
+    object JournalConfirmation: Screen(route = "journal_confirmation")
     object JournalView: Screen(route = "journal_view")
     object JournalHistory: Screen(route = "journalhistory_screen")
     object AssasmentResult: Screen(route = "cresult_screen")
@@ -28,4 +28,5 @@ sealed class Screen(val route: String){
     object Reset: Screen(route = "reset_screen")
     object AssasmentResult2: Screen(route = "result2_screen")
     object AssasmentResult3: Screen(route = "result3.screen")
+    object ConselingDialog: Screen(route = "conseling_dialog")
 }

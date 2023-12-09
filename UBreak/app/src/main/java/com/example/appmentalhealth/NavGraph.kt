@@ -73,7 +73,7 @@ fun SetupNavGraph(
             JournalViewScreen(navController, userId = String())
         }
         composable(
-            route = Screen.Journalconfirmation.route
+            route = Screen.JournalConfirmation.route
         ){
             JournalConfirmationScreen(navController, date = String() )
         }
@@ -168,6 +168,12 @@ fun SetupNavGraph(
             route = Screen.AssasmentResult3.route
         ){
             AssasmentResult3Screen(navController)
+        }
+        composable(
+            route = Screen.ConselingDialog.route
+        ){
+            ConselingdialogScreen(navController, onDismiss = { /*TODO*/ }) {
+            }
         }
 
     }

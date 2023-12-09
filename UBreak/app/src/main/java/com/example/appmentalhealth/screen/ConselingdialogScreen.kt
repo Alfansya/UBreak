@@ -1,11 +1,11 @@
 package com.example.appmentalhealth.screen
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -33,16 +33,14 @@ import com.example.appmentalhealth.R
 import com.example.appmentalhealth.ui.theme.Green4
 import com.example.appmentalhealth.ui.theme.White
 import com.example.appmentalhealth.ui.theme.alegreyaFamily
-import com.google.firebase.auth.FirebaseAuth
+import com.example.appmentalhealth.Screen
 
 @Composable
-fun LogoutScreen(
+fun ConselingdialogScreen(
     navController: NavController,
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
-) {
-    val auth = FirebaseAuth.getInstance() // Initialize Firebase Authentication
-
+){
     Dialog(
         onDismissRequest = {
             onDismiss()
@@ -56,7 +54,7 @@ fun LogoutScreen(
             shape = RoundedCornerShape(15.dp),
             modifier = Modifier
                 .width(250.dp)
-                .height(240.dp)
+                .height(200.dp)
                 .border(1.dp, Color.White, shape = RoundedCornerShape(15.dp)),
         ) {
             Column(
@@ -67,16 +65,15 @@ fun LogoutScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.dialogue),
+                    painter = painterResource(id = R.drawable.dialogconseling),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(50.dp)
+                        .height(55.dp)
                 )
                 // Content of your custom dialog
                 Text(
-                    text = "Oh no! You’re leaving....\n" +
-                            "Are you sure?",
+                    text = "Is the chosen time and method correct?",
                     fontFamily = alegreyaFamily,
                     fontWeight = FontWeight.Normal,
                     fontSize = 16.sp,
@@ -85,54 +82,48 @@ fun LogoutScreen(
                         .padding(10.dp)
                         .fillMaxWidth()
                 )
-                Column(modifier = Modifier
-                    .width(210.dp)
-                    .height(35.dp)
-                    .clip(RoundedCornerShape(5.dp)),
+                Spacer(modifier = Modifier.padding(5.dp))
+                Row(
+                    modifier = Modifier
+                        .width(310.dp)
+                        .height(35.dp)
+                        .clip(RoundedCornerShape(5.dp)),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Button(
                         onClick = {
                             // Sign out the user
-                            auth.signOut()
-                            onConfirm()
-                            navController.navigate("login_screen") {
-                                popUpTo("login_screen") {
-                                    inclusive = true
-                                }
-                            }
+                            navController.navigate(route = Screen.Main.route)
                         },
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .width(90.dp)
                             .fillMaxHeight()
                             .padding(1.dp),
                         colors = ButtonDefaults.buttonColors(Green4)
                     ) {
                         Text(
-                            text = "Yes, Log Me Out",
+                            text = "Yes",
                             fontFamily = alegreyaFamily,
                             fontWeight = FontWeight.Thin,
                             fontSize = 14.sp,
                             color = White,
                         )
                     }
-                }
-                Row(
-                    Modifier
-                        .padding(top = 20.dp)
-                ) {
+                    Spacer(modifier = Modifier.width(20.dp)) // Adjust the space between buttons
                     Button(
                         onClick = {
                             onDismiss()
                             navController.popBackStack()
                         },
                         modifier = Modifier
-                            .width(210.dp)
-                            .height(35.dp)
+                            .width(90.dp)
+                            .fillMaxHeight()
                             .padding(0.dp),
                         colors = ButtonDefaults.buttonColors(White)
                     ) {
                         Text(
-                            text = "No, Take Me Back",
+                            text = "No",
                             fontFamily = alegreyaFamily,
                             fontWeight = FontWeight.Thin,
                             fontSize = 14.sp,
@@ -140,9 +131,8 @@ fun LogoutScreen(
                         )
                     }
                 }
+
             }
         }
     }
 }
-
-
